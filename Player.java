@@ -19,7 +19,7 @@ public class Player{
     }
     public static void totalPlayers() {
         var s = new Scanner(System.in);
-        while ((playernumbers<1 || playernumbers>5)) {
+        while ((playernumbers<2 || playernumbers>4)) {
         System.out.println("Write how many players you are");
         playernumbers = s.nextInt();
         }
