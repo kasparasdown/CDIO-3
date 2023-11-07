@@ -5,26 +5,35 @@ public class Frame extends JFrame implements ActionListener{
 	JButton button;
 	JLabel label;
     JTextArea text;
+	JPanel botPanel, midPanel;
+	Font myFont = new Font("myFont", Font.BOLD, 25);
 
 	Frame(){
 		
-		label = new JLabel("Hey Mate");
+
+		label = new JLabel("Welcome to Monopoly");
 		label.setBounds(150, 150, 300, 200);
 		label.setVisible(true);
-        label.setFont(new Font("Comic Sans", Font.BOLD, 25));
+        label.setFont(myFont);
         label.setBackground(Color.gray);
+
+		botPanel = new JPanel();
+		midPanel = new JPanel();
+		botPanel.setBackground(Color.darkGray);
+		midPanel.setBackground(Color.lightGray);
+		botPanel.setPreferredSize(new Dimension(100, 100));
+		midPanel.setPreferredSize(new Dimension(100, 100));
 		
 		button = new JButton();
-		button.setBounds(100, 100, 250, 100);
+		button.setBounds(0, 0, 50, 25);
 		button.addActionListener(this);
 		button.setText("I'm a button!");
 		
 		button.setFocusable(false);
 		button.setHorizontalTextPosition(JButton.CENTER);
-		button.setVerticalTextPosition(JButton.BOTTOM);
-		button.setFont(new Font("Comic Sans",Font.BOLD,25));
-		button.setIconTextGap(-15);
-		button.setForeground(Color.pink);
+		button.setVerticalTextPosition(JButton.CENTER);
+		button.setFont(myFont);
+		button.setForeground(Color.white);
 		button.setBackground(Color.black);
 		button.setBorder(BorderFactory.createEtchedBorder());
 		
@@ -33,36 +42,19 @@ public class Frame extends JFrame implements ActionListener{
 		this.setSize(500,500);
 		this.setVisible(true);
         this.setForeground(Color.darkGray);
-		this.add(button);
-		this.add(label);
+		this.setLayout(new BorderLayout());
+		botPanel.add(button);
+		midPanel.add(label);
+		this.add(botPanel, BorderLayout.SOUTH);
+		this.add(midPanel, BorderLayout.CENTER);
 
 	}
-    int n;
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==button) {
-            outputs(n);
-            n++;
-			button.setEnabled(true);
-			label.setVisible(true);
-            if(n==4) n=0;
+	public void actionPerformed(ActionEvent click) {
+		if(click.getSource()==button) {
+
 		}	
 	}
-    public void outputs(int n) {
-        switch(n) {
-            case 1:
-            label.setText("Why you roll");
-            break;
-            case 2:
-            label.setText("try again");
-            break;
-            case 3:
-            label.setText("you so bad at rolling");
-            break;
-            default:
-                label.setText("you stupid");
-            break;
-        }
-    }
 }
     
