@@ -1,7 +1,8 @@
+import java.util.Scanner;
 public class Player{
     String name;
     int coin;
-    int playernumbers;
+    static int playernumbers;
 
     public Player(String name, int coin) {
         this.name = name;
@@ -16,7 +17,10 @@ public class Player{
     public void addCoins(int value) {
             coin =+ value;
     }
-    public void totalPlayers(int number) {
-        playernumbers = number;
+    public static void totalPlayers() {
+        var s = new Scanner(System.in);
+        System.out.println("Write how many players you are");
+        playernumbers = s.nextInt();
+        s.close();
     }
 }
