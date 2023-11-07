@@ -3,19 +3,19 @@ import java.awt.event.*;
 import javax.swing.*;
 public class Frame extends JFrame implements ActionListener{
 	JButton button;
+	JButton[] playerButton = new JButton[3];
 	JLabel label;
     JTextArea text;
 	JPanel botPanel, midPanel;
 	Font myFont = new Font("myFont", Font.BOLD, 25);
 
 	Frame(){
-		
 
-		label = new JLabel("Welcome to Monopoly");
+		label = new JLabel("Choose the number of players");
 		label.setBounds(150, 150, 300, 200);
-		label.setVisible(true);
         label.setFont(myFont);
         label.setBackground(Color.gray);
+		label.setVisible(true);
 
 		botPanel = new JPanel();
 		midPanel = new JPanel();
@@ -27,15 +27,23 @@ public class Frame extends JFrame implements ActionListener{
 		button = new JButton();
 		button.setBounds(0, 0, 50, 25);
 		button.addActionListener(this);
-		button.setText("I'm a button!");
+		button.setText("Roll");
 		
 		button.setFocusable(false);
 		button.setHorizontalTextPosition(JButton.CENTER);
 		button.setVerticalTextPosition(JButton.CENTER);
 		button.setFont(myFont);
-		button.setForeground(Color.white);
-		button.setBackground(Color.black);
-		button.setBorder(BorderFactory.createEtchedBorder());
+		button.setBackground(Color.white);
+		button.setVisible(false);
+
+		
+		for (var i=0; i<3; i++) {
+			playerButton[i] = new JButton(String.valueOf(i+2));
+			playerButton[i].addActionListener(this);
+			playerButton[i].setFont(myFont);
+			playerButton[i].setFocusable(false);
+			botPanel.add(playerButton[i]);
+		}
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
@@ -47,13 +55,22 @@ public class Frame extends JFrame implements ActionListener{
 		midPanel.add(label);
 		this.add(botPanel, BorderLayout.SOUTH);
 		this.add(midPanel, BorderLayout.CENTER);
+		
 
 	}
 
+	//Choosing number of players, and starts the game.
 	@Override
 	public void actionPerformed(ActionEvent click) {
-		if(click.getSource()==button) {
-
+		for(int j=0; j<3; j++) {
+			if(click.getSource()==playerButton[j]) {
+				Player.totalPlayers(j+2);
+				for (var i=0; i<3; i++) {
+					playerButton[i].setVisible(false);
+				}
+				button.setVisible(true);
+				label.setText("Player 1 starts. Press the Roll button");
+			}
 		}	
 	}
 }

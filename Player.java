@@ -17,13 +17,11 @@ public class Player{
     public void addCoins(int value) {
             coin =+ value;
     }
-    public static void totalPlayers() {
-        var s = new Scanner(System.in);
+    public static void totalPlayers(int numb) {
         while ((playernumbers<2 || playernumbers>4)) {
         System.out.println("Write how many players you are");
-        playernumbers = s.nextInt();
+        playernumbers = numb;
         }
         System.out.println(playernumbers+" players confirmed");
-        s.close();
     }
 }

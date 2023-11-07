@@ -1,6 +1,5 @@
 public class Game {
     public static void runGame() {
-    
-        Player.totalPlayers();
+        var myFrame = new Frame();
     }
 }
