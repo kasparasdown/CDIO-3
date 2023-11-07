@@ -1,8 +1,8 @@
 public class Player{
-   
     String name;
     int coin;
-    
+    int playernumbers;
+
     public Player(String name, int coin) {
         this.name = name;
         this.coin = coin;
@@ -15,5 +15,8 @@ public class Player{
     }
     public void addCoins(int value) {
             coin =+ value;
+    }
+    public void totalPlayers(int number) {
+        playernumbers = number;
     }
 }
