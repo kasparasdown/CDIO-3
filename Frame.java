@@ -6,7 +6,6 @@ public class Frame extends JFrame implements ActionListener{
 	JButton button;
 	JButton[] playerButton = new JButton[3];
 	JLabel label;
-    JTextArea text;
 	JPanel botPanel, midPanel;
 	Font myFont = new Font("myFont", Font.BOLD, 25);
 
@@ -36,7 +35,6 @@ public class Frame extends JFrame implements ActionListener{
 		button.setFont(myFont);
 		button.setBackground(Color.white);
 		button.setVisible(false);
-
 		
 		for (var i=0; i<3; i++) {
 			playerButton[i] = new JButton(String.valueOf(i+2));
@@ -72,20 +70,11 @@ public class Frame extends JFrame implements ActionListener{
 				button.setVisible(true);
 				label.setText("Player 1 starts. Press the Roll button");
 			}
-		}	
-	}
-	public void rollPerformed(ActionEvent click) {
-			if(click.getSource()==button) {
-				dices.dieRoll();
+		}
+		if(click.getSource()==button) {
+				var rollResult = Die.dieRoll(); // Call the dieRoll method on the class itself
+				System.out.println("You rolled: " + rollResult);
 			}
-		}	
 	}
-class dices {
-	public static int dieRoll() {
-			Random rand = new Random();
-			var r = rand.nextInt(6) + 1;
-			System.out.println("your rolled:" +r);
-            return rand.nextInt(6) + 1;
-        }
 }
     
