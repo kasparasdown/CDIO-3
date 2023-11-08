@@ -15,13 +15,10 @@ public class Player{
         return coin;
     }
     public void addCoins(int value) {
-            coin =+ value;
+            coin += value;
     }
     public static void totalPlayers(int numb) {
-        while ((playernumbers<2 || playernumbers>4)) {
-        System.out.println("Write how many players you are");
         playernumbers = numb;
-        }
-        System.out.println(playernumbers+" players confirmed");
+        System.out.println(playernumbers+" Number of Players!"); //This is a test, remove later
     }
 }
