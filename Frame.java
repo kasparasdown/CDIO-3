@@ -73,7 +73,7 @@ public class Frame extends JFrame implements ActionListener{
 		}
 		if(click.getSource()==button) {
 				var rollResult = Die.dieRoll(); // Call the dieRoll method on the class itself
-				System.out.println("You rolled: " + rollResult);
+				label.setText("You rolled: " + rollResult);
 			}
 	}
 }
