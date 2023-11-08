@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class Die{
     
     Random rand = new Random();
@@ -8,10 +9,11 @@ public class Die{
         public Die(int dieSize) {
             this.dieSize = dieSize; 
         }
-        public int getDie() {
+        public int Die() {
              return dieSize;
         }
         public int dieRoll() {
+            
             return rand.nextInt(this.dieSize) + 1;
         }
 }
