@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Random;
 public class Frame extends JFrame implements ActionListener{
 	JButton button;
 	JButton[] playerButton = new JButton[3];
@@ -73,5 +74,18 @@ public class Frame extends JFrame implements ActionListener{
 			}
 		}	
 	}
+	public void rollPerformed(ActionEvent click) {
+			if(click.getSource()==button) {
+				dices.dieRoll();
+			}
+		}	
+	}
+class dices {
+	public static int dieRoll() {
+			Random rand = new Random();
+			var r = rand.nextInt(6) + 1;
+			System.out.println("your rolled:" +r);
+            return rand.nextInt(6) + 1;
+        }
 }
     
