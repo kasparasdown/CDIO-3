@@ -5,7 +5,8 @@ import javax.swing.*;
 public class Frame extends JFrame implements ActionListener {
     JButton rollButton, skipButton, buyButton;
     JButton[] playerButton = new JButton[3];
-    JLabel label, plabel, locationLabel;
+    JLabel label, plabel;
+    static JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
     Font myFont = new Font("myFont", Font.BOLD, 23);
@@ -123,8 +124,9 @@ public class Frame extends JFrame implements ActionListener {
         if (click.getSource() == rollButton) {
             turnRoll(false);
             var rollResult = Die.dieRoll();
-            Player.getCurrentPlayer().addCoins(rollResult);
+            Player.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
             label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
+            Player.getCurrentPlayer().move(rollResult);
             getPlayerLabels();
         }
         //Pass turn to next player
@@ -134,6 +136,7 @@ public class Frame extends JFrame implements ActionListener {
             turnRoll(true);
         }
     }
+
     //Call to get label with all the players points on.
     public JLabel[] getPlayerLabels() {
         rightPanel.removeAll();
@@ -150,5 +153,9 @@ public class Frame extends JFrame implements ActionListener {
         rightPanel.repaint();
 
         return pointsLabel;
+    }
+    //Tells the player location on Board
+    public static void locationLabelText(String input) {
+        locationLabel.setText(input);
     }
 }

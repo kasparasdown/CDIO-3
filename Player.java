@@ -60,6 +60,7 @@ public class Player {
     }
     public void move(int roll) {
         location = (location + roll) %24;
+        Frame.locationLabelText(Integer.toString(location)); //Changes the label in GUI to the location. CHANGE INT TO A TILE!
     }
 
     public void payRent(int rent) {
