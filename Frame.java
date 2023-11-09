@@ -120,10 +120,11 @@ public class Frame extends JFrame implements ActionListener {
                 locationLabel.setVisible(true);
             }
         }
+        var rollResult = 0;
         //Rolls for turn, change turn to buystep/skipstep
         if (click.getSource() == rollButton) {
             turnRoll(false);
-            var rollResult = Die.dieRoll();
+            rollResult = Die.dieRoll();
             Player.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
             label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
             Player.getCurrentPlayer().move(rollResult);
@@ -132,6 +133,7 @@ public class Frame extends JFrame implements ActionListener {
         //Pass turn to next player
         if (click.getSource() == skipButton) {
             Player.switchPlayer();
+            locationLabel.setText(Integer.toString(Player.getCurrentPlayer().getLocation())); //Tells the new player where they are standing. CHANGE INTEGER
             label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }

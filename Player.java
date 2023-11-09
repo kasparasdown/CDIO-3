@@ -29,6 +29,9 @@ public class Player {
     public int getCoin() {
         return coin;
     }
+    public int getLocation() {
+        return location;
+    }
 
     public void addCoins(int value) {
         coin += value;
