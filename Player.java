@@ -1,7 +1,7 @@
 public class Player {
     String name;
     int coin;
-    static int playernumbers = 0;
+    static int playerNumbers = 0;
     private static Player[] players;
     private static int playerIndex = 0;
 
@@ -23,24 +23,24 @@ public class Player {
     }
 
     public static void totalPlayers(int numb) {
-        playernumbers = numb;
-        players = new Player[playernumbers]; // Initialize the players array
-        System.out.println(playernumbers + " Number of Players!"); // This is a test, remove later
+        playerNumbers = numb;
+        players = new Player[playerNumbers]; // Initialize the players array
+        System.out.println(playerNumbers + " Number of Players!"); // This is a test, remove later
     }
 
     public static Player[] createPlayers() {
-        for (int i = 0; i < playernumbers; i++) {
+        for (int i = 0; i < playerNumbers; i++) {
             players[i] = new Player("Player " + (i + 1));
         }
         return players;
     }
 
-    public static Player[] getAllPlayers() {
-        return players;
+    public static Player getPlayerNumb(int number) {
+        return players[number];
     }
 
     public static void switchPlayer() {
-        playerIndex = (playerIndex + 1) % playernumbers;
+        playerIndex = (playerIndex + 1) % playerNumbers;
     }
 
     public static Player getCurrentPlayer() {
