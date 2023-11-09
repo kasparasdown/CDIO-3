@@ -123,10 +123,9 @@ public class Frame extends JFrame implements ActionListener {
             pointsLabel[i] = new JLabel("P" + (i + 1) + ": " + Player.getPlayerNumb(i).getCoin() + "$");
             pointsLabel[i].setFont(myFont);
             pointsLabel[i].setForeground(Color.BLACK);
-            pointsLabel[i].setVisible(true);
+			pointsLabel[i].setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
             rightPanel.add(pointsLabel[i]);
         }
-
         // Refresh the GUI
         rightPanel.revalidate();
         rightPanel.repaint();
