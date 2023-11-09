@@ -66,6 +66,17 @@ public class Frame extends JFrame implements ActionListener{
 		
 
 	}
+	
+	public void turnRoll(boolean isTrue) {
+		if(isTrue) {
+			skipButton.setVisible(false);
+			rollButton.setVisible(true);
+		}
+		else {
+			skipButton.setVisible(true);
+			rollButton.setVisible(false);
+		}
+	}
 
 	//Choosing number of players, and starts the game.
 	@Override
@@ -82,8 +93,7 @@ public class Frame extends JFrame implements ActionListener{
 			}
 		}
 		if(click.getSource()==rollButton) {
-				skipButton.setVisible(true);
-				rollButton.setVisible(false);
+				turnRoll(false);
 				var rollResult = Die.dieRoll(); // Call the dieRoll method on the class itself
 				Player.getCurrentPlayer().addCoins(rollResult); //Change later to money from the game!!!!
 				label.setText(Player.getCurrentPlayer().getName()+" rolled: " + rollResult);
@@ -91,8 +101,7 @@ public class Frame extends JFrame implements ActionListener{
 		if(click.getSource()==skipButton) {
 			Player.switchPlayer();
 			label.setText(Player.getCurrentPlayer().getName()+" its your turn now, roll");
-			skipButton.setVisible(false);
-			rollButton.setVisible(true);
+			turnRoll(true);
 		}
 	}
 }
