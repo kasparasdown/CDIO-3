@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Frame extends JFrame implements ActionListener {
-    JButton rollButton, skipButton;
+    JButton rollButton, skipButton, buyButton;
     JButton[] playerButton = new JButton[3];
     JLabel label, plabel;
     JLabel[] pointsLabel;
@@ -53,6 +53,16 @@ public class Frame extends JFrame implements ActionListener {
         skipButton.setBackground(Color.white);
         skipButton.setVisible(false);
 
+        buyButton = new JButton("Buy");
+        buyButton.setBounds(0, 0, 50, 25);
+        buyButton.addActionListener(this);
+        buyButton.setFocusable(false);
+        buyButton.setHorizontalTextPosition(JButton.CENTER);
+        buyButton.setVerticalTextPosition(JButton.CENTER);
+        buyButton.setFont(myFont);
+        buyButton.setBackground(Color.white);
+        buyButton.setVisible(false);
+
         for (var i = 0; i < 3; i++) {
             playerButton[i] = new JButton(String.valueOf(i + 2));
             playerButton[i].addActionListener(this);
@@ -69,6 +79,7 @@ public class Frame extends JFrame implements ActionListener {
         this.setLayout(new BorderLayout());
         botPanel.add(rollButton);
         botPanel.add(skipButton);
+        botPanel.add(buyButton);
         midPanel.add(label);
         this.add(botPanel, BorderLayout.SOUTH);
         this.add(midPanel, BorderLayout.CENTER);
@@ -76,14 +87,10 @@ public class Frame extends JFrame implements ActionListener {
 
     }
 
-    public void turnRoll(boolean isTrue) {
-        if (isTrue) {
-            skipButton.setVisible(false);
-            rollButton.setVisible(true);
-        } else {
-            skipButton.setVisible(true);
-            rollButton.setVisible(false);
-        }
+    public void turnRoll(boolean status) {
+            skipButton.setVisible(!status);
+            rollButton.setVisible(status);
+            if(true) buyButton.setVisible(!status); //Change to true, when player is on a UnOwned Property!
     }
 
     @Override
