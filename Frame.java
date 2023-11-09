@@ -1,9 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.Random;
 public class Frame extends JFrame implements ActionListener{
-	JButton button;
+	JButton rollButton, skipButton;
 	JButton[] playerButton = new JButton[3];
 	JLabel label;
 	JPanel botPanel, midPanel;
@@ -25,17 +24,25 @@ public class Frame extends JFrame implements ActionListener{
 		botPanel.setPreferredSize(new Dimension(100, 100));
 		midPanel.setPreferredSize(new Dimension(100, 100));
 		
-		button = new JButton();
-		button.setBounds(0, 0, 50, 25);
-		button.addActionListener(this);
-		button.setText("Roll");
-		
-		button.setFocusable(false);
-		button.setHorizontalTextPosition(JButton.CENTER);
-		button.setVerticalTextPosition(JButton.CENTER);
-		button.setFont(myFont);
-		button.setBackground(Color.white);
-		button.setVisible(false);
+		rollButton = new JButton("Roll");
+		rollButton.setBounds(0, 0, 50, 25);
+		rollButton.addActionListener(this);
+		rollButton.setFocusable(false);
+		rollButton.setHorizontalTextPosition(JButton.CENTER);
+		rollButton.setVerticalTextPosition(JButton.CENTER);
+		rollButton.setFont(myFont);
+		rollButton.setBackground(Color.white);
+		rollButton.setVisible(false);
+
+		skipButton = new JButton("Pass");
+		skipButton.setBounds(0, 0, 50, 25);
+		skipButton.addActionListener(this);
+		skipButton.setFocusable(false);
+		skipButton.setHorizontalTextPosition(JButton.CENTER);
+		skipButton.setVerticalTextPosition(JButton.CENTER);
+		skipButton.setFont(myFont);
+		skipButton.setBackground(Color.white);
+		skipButton.setVisible(false);
 		
 		for (var i=0; i<3; i++) {
 			playerButton[i] = new JButton(String.valueOf(i+2));
@@ -51,7 +58,8 @@ public class Frame extends JFrame implements ActionListener{
 		this.setVisible(true);
         this.setForeground(Color.darkGray);
 		this.setLayout(new BorderLayout());
-		botPanel.add(button);
+		botPanel.add(rollButton);
+		botPanel.add(skipButton);
 		midPanel.add(label);
 		this.add(botPanel, BorderLayout.SOUTH);
 		this.add(midPanel, BorderLayout.CENTER);
@@ -69,14 +77,23 @@ public class Frame extends JFrame implements ActionListener{
 				for (var i=0; i<3; i++) {
 					playerButton[i].setVisible(false);
 				}
-				button.setVisible(true);
-				label.setText(Player.getCurrentPlayer().getName()+" starts. Press the Roll button");
+				rollButton.setVisible(true);
+				label.setText(Player.getCurrentPlayer().getName()+" starts. Press the Roll rollButton");
 			}
 		}
-		if(click.getSource()==button) {
+		if(click.getSource()==rollButton) {
+				skipButton.setVisible(true);
+				rollButton.setVisible(false);
 				var rollResult = Die.dieRoll(); // Call the dieRoll method on the class itself
+				Player.getCurrentPlayer().addCoins(rollResult); //Change later to money from the game!!!!
 				label.setText(Player.getCurrentPlayer().getName()+" rolled: " + rollResult);
 			}
+		if(click.getSource()==skipButton) {
+			Player.switchPlayer();
+			label.setText(Player.getCurrentPlayer().getName()+" its your turn now, roll");
+			skipButton.setVisible(false);
+			rollButton.setVisible(true);
+		}
 	}
 }
     
