@@ -4,10 +4,22 @@ public class Player {
     static int playerNumbers = 0;
     private static Player[] players;
     private static int playerIndex = 0;
+    private int location;
 
     public Player(String name) {
         this.name = name;
-        this.coin = 0;
+        switch(playerNumbers) {
+            case 2:
+                this.coin = 20;
+                break;
+            case 3:
+                this.coin = 18;
+                break;
+            case 4:
+                this.coin = 16;
+                break;
+        }
+        this.location = 0;
     }
 
     public String getName() {
@@ -45,5 +57,12 @@ public class Player {
 
     public static Player getCurrentPlayer() {
         return players[playerIndex];
+    }
+    public void move(int roll) {
+        location = (location + roll) %24;
+    }
+
+    public void payRent(int rent) {
+        // gonna pay rent
     }
 }
