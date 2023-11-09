@@ -82,6 +82,7 @@ public class Frame extends JFrame implements ActionListener {
         }
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Junior Monopoly");
         this.setLayout(new BorderLayout());
         this.setSize(500, 500);
         this.setVisible(true);
