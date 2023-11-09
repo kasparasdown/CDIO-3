@@ -8,6 +8,7 @@ public class Frame extends JFrame implements ActionListener{
 	JLabel label;
 	JPanel botPanel, midPanel;
 	Font myFont = new Font("myFont", Font.BOLD, 25);
+	ImageIcon logo;
 
 	Frame(){
 
@@ -64,16 +65,17 @@ public class Frame extends JFrame implements ActionListener{
 		for(int j=0; j<3; j++) {
 			if(click.getSource()==playerButton[j]) {
 				Player.totalPlayers(j+2);
+				Player.createPlayers();
 				for (var i=0; i<3; i++) {
 					playerButton[i].setVisible(false);
 				}
 				button.setVisible(true);
-				label.setText("Player 1 starts. Press the Roll button");
+				label.setText(Player.getCurrentPlayer().getName()+" starts. Press the Roll button");
 			}
 		}
 		if(click.getSource()==button) {
 				var rollResult = Die.dieRoll(); // Call the dieRoll method on the class itself
-				label.setText("You rolled: " + rollResult);
+				label.setText(Player.getCurrentPlayer().getName()+" rolled: " + rollResult);
 			}
 	}
 }
