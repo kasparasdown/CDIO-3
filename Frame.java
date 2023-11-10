@@ -94,7 +94,6 @@ public class Frame extends JFrame implements ActionListener {
         botPanel.add(buyButton);
         midPanel.add(label);
         midPanel.add(locationLabel);
-        midPanel.add(textField);
 
     }
     //Switch between start of turn(rolling) and end of turn (buying or passing turn)
