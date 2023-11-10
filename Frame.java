@@ -11,10 +11,8 @@ public class Frame extends JFrame implements ActionListener {
     JPanel botPanel, midPanel, rightPanel;
     Font myFont = new Font("myFont", Font.BOLD, 23);
     Font smallFont = new Font("smallFont", Font.BOLD, 15);
-    ImageIcon logo;
 
     Frame() {
-        
         label = new JLabel("Choose the number of players");
         label.setFont(myFont);
         label.setBackground(Color.gray);
@@ -96,6 +94,7 @@ public class Frame extends JFrame implements ActionListener {
         botPanel.add(buyButton);
         midPanel.add(label);
         midPanel.add(locationLabel);
+        midPanel.add(textField);
 
     }
     //Switch between start of turn(rolling) and end of turn (buying or passing turn)
