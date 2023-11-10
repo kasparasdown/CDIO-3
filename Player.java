@@ -73,9 +73,6 @@ public class Player {
 
         Tiles currentTile = getCurrentTile(allTiles);
 
-        // Handle any special actions
-        // handleTileAction(currentTile);
-
         Frame.locationLabelText(currentTile.toString());
     }
     public String getCurrentTileString() {
@@ -87,4 +84,30 @@ public class Player {
     public void payRent(int rent) {
         // gonna pay rent
     }
+    public void buyProperty() {
+        Tiles currentTile = getCurrentTile(tile.getAllTiles());
+
+        if (currentTile instanceof PropertyField) {
+            PropertyField property = (PropertyField) currentTile;
+
+            if (!property.isOwned()) {
+                if (coin >= property.getRent()) {
+                    property.setOwner(this);
+                    coin -= property.getRent();
+                    System.out.println(name + " bought " + property.getName());
+                    Frame.locationLabelText(name + " bought " + property.getName());
+                } else {
+                    System.out.println(name + " does not have enough coins to buy " + property.getName());
+                    Frame.locationLabelText(name + " does not have enough coins to buy " + property.getName());
+                }
+            } else {
+                System.out.println(property.getName() + " is already owned by " + property.getOwner().getName());
+                Frame.locationLabelText(property.getName() + " is already owned by " + property.getOwner().getName());
+            }
+        } else {
+            System.out.println("You didn't land on a property.");
+            Frame.locationLabelText("You didn't land on a property.");
+        }
+    }
+
 }
