@@ -68,13 +68,13 @@ public class Player {
     }
     public void move(int roll) {
         Tiles[] allTiles = tile.getAllTiles(); 
-        Tiles currentTile = getCurrentTile(allTiles);
-
         int newPosition = (location + roll) % 24; 
         location = newPosition;
 
+        Tiles currentTile = getCurrentTile(allTiles);
+
         // Handle any special actions
-        //handleTileAction(currentTile);
+        // handleTileAction(currentTile);
 
         Frame.locationLabelText(currentTile.toString());
     }
