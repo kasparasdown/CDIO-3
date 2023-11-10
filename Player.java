@@ -5,6 +5,7 @@ public class Player {
     private static Player[] players;
     private static int playerIndex = 0;
     private int location;
+    private Tiles tile;
 
     public Player(String name) {
         this.name = name;
@@ -20,6 +21,7 @@ public class Player {
                 break;
         }
         this.location = 0;
+        this.tile = new Tiles(0, "Start"); // Initialize the tile variable with the starting tile
     }
 
     public String getName() {
@@ -61,9 +63,25 @@ public class Player {
     public static Player getCurrentPlayer() {
         return players[playerIndex];
     }
+    public Tiles getCurrentTile(Tiles[] tiles) {
+        return tiles[location];
+    }
     public void move(int roll) {
-        location = (location + roll) %24;
-        Frame.locationLabelText(Integer.toString(location)); //Changes the label in GUI to the location. CHANGE INT TO A TILE!
+        Tiles[] allTiles = tile.getAllTiles(); 
+        Tiles currentTile = getCurrentTile(allTiles);
+
+        int newPosition = (location + roll) % 24; 
+        location = newPosition;
+
+        // Handle any special actions
+        //handleTileAction(currentTile);
+
+        Frame.locationLabelText(currentTile.toString());
+    }
+    public String getCurrentTileString() {
+        Tiles[] allTiles = tile.getAllTiles();
+        Tiles currentTile = getCurrentTile(allTiles);
+        return currentTile.toString();
     }
 
     public void payRent(int rent) {

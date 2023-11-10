@@ -21,6 +21,7 @@ public class Frame extends JFrame implements ActionListener {
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         locationLabel = new JLabel("START");
+        locationLabel.setPreferredSize(new Dimension(250, 250));
         locationLabel.setFont(myFont);
         locationLabel.setBackground(Color.gray);
         locationLabel.setVisible(false);
@@ -132,7 +133,7 @@ public class Frame extends JFrame implements ActionListener {
         //Pass turn to next player
         if (click.getSource() == skipButton) {
             Player.switchPlayer();
-            locationLabel.setText(Integer.toString(Player.getCurrentPlayer().getLocation())); //Tells the new player where they are standing. CHANGE INTEGER
+            locationLabel.setText(Player.getCurrentPlayer().getCurrentTileString()); //Tells the new player where they are standing. CHANGE INTEGER
             label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }
@@ -152,7 +153,6 @@ public class Frame extends JFrame implements ActionListener {
         }
         rightPanel.revalidate();
         rightPanel.repaint();
-
         return pointsLabel;
     }
     //Tells the player location on Board
