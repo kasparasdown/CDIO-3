@@ -97,11 +97,23 @@ public class Frame extends JFrame implements ActionListener {
         midPanel.add(locationLabel);
 
     }
-    //Switch between start of turn(rolling) and end of turn (buying or passing turn)
     public void turnRoll(boolean status) {
             skipButton.setVisible(!status);
             rollButton.setVisible(status);
-            if(true) buyButton.setVisible(!status); //Change to true, when player is on a UnOwned Property!
+
+            Player currentPlayer = GameUtils.getCurrentPlayer();
+            Tiles currentTile = currentPlayer.getCurrentTile(currentPlayer.getTile().getAllTiles());
+            if (currentTile instanceof PropertyField) {
+                PropertyField property = (PropertyField) currentTile;
+        
+                //debbuging
+                System.out.println("Owner: " + property.getOwner());
+                System.out.println("Is property owned? " + property.isOwned());
+        
+                buyButton.setVisible((property.getOwner() == null && !status) || (property.getOwner() != currentPlayer));
+            } else {
+                buyButton.setVisible(false);
+            }
     }
 
     //Takes click from buttons, and do stuff
@@ -109,13 +121,12 @@ public class Frame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent click) {
         for (int j = 0; j < 3; j++) {
             if (click.getSource() == playerButton[j]) {
-                Player.totalPlayers(j + 2);
-                Player.createPlayers(); //This makes the player objects
+                GameUtils.totalPlayers(j + 2);
                 for (var i = 0; i < 3; i++) {
                     playerButton[i].setVisible(false);
                 }
                 rollButton.setVisible(true);
-                label.setText(Player.getCurrentPlayer().getName() + " starts. Roll!");
+                label.setText(GameUtils.getCurrentPlayer().getName() + " starts. Roll!");
                 getPlayerLabels(); //Inserts the players Points on the right side
                 locationLabel.setVisible(true);
             }
@@ -125,20 +136,20 @@ public class Frame extends JFrame implements ActionListener {
         if (click.getSource() == rollButton) {
             turnRoll(false);
             rollResult = Die.dieRoll();
-            Player.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
-            label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
-            Player.getCurrentPlayer().move(rollResult);
+            GameUtils.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
+            label.setText(GameUtils.getCurrentPlayer().getName() + " rolled: " + rollResult);
+            GameUtils.getCurrentPlayer().move(rollResult);
             getPlayerLabels();
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {
-            Player.switchPlayer();
-            locationLabel.setText(Player.getCurrentPlayer().getCurrentTileString()); //Tells the new player where they are standing. CHANGE INTEGER
-            label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
+            GameUtils.switchPlayer();
+            locationLabel.setText(GameUtils.getCurrentPlayer().getCurrentTileString()); //Tells the new player where they are standing. CHANGE INTEGER
+            label.setText(GameUtils.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }
         if (click.getSource() == buyButton) {
-            Player.getCurrentPlayer().buyProperty();
+            GameUtils.getCurrentPlayer().buyProperty();
         }
     }
 
@@ -146,9 +157,9 @@ public class Frame extends JFrame implements ActionListener {
     public JLabel[] getPlayerLabels() {
         rightPanel.removeAll();
 
-        pointsLabel = new JLabel[Player.playerNumbers];
-        for (int i = 0; i < Player.playerNumbers; i++) {
-            pointsLabel[i] = new JLabel("P" + (i + 1) + ": " + Player.getPlayerNumb(i).getCoin() + "$");
+        pointsLabel = new JLabel[GameUtils.playerNumbers];
+        for (int i = 0; i < GameUtils.playerNumbers; i++) {
+            pointsLabel[i] = new JLabel("P" + (i + 1) + ": " + GameUtils.getPlayerNumb(i).getCoin() + "$");
             pointsLabel[i].setFont(myFont);
             pointsLabel[i].setForeground(Color.BLACK);
 			pointsLabel[i].setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
