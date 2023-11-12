@@ -31,7 +31,8 @@ public class Player {
     public int getLocation() {
         return location;
     }
-    public void setPlayerTilePos(int pos) {
+    public void setlocation(int pos) {
+        this.location = pos;
     }
 
     public void addCoins(int value) {
@@ -43,15 +44,7 @@ public class Player {
     public Tiles getTile() {
         return tile;
     }
-    public void move(int roll) {
-        Tiles[] allTiles = tile.getAllTiles(); 
-        int newPosition = (location + roll) % 24; 
-        location = newPosition;
 
-        Tiles currentTile = getCurrentTile(allTiles);
-
-        Frame.locationLabelText(currentTile.toString());
-    }
     public String getCurrentTileString() {
         Tiles[] allTiles = tile.getAllTiles();
         Tiles currentTile = getCurrentTile(allTiles);
@@ -72,14 +65,14 @@ public class Player {
                     property.setOwner(this);
                     coin -= property.getRent();
                     System.out.println(name + " bought " + property.getName());
-                    Frame.locationLabelText(name + " bought " + property.getName());
+                    //Frame.locationLabelText(name + " bought " + property.getName());
                 } else {
                     System.out.println(name + " does not have enough coins to buy " + property.getName());
-                    Frame.locationLabelText(name + " does not have enough coins to buy " + property.getName());
+                    //Frame.locationLabelText(name + " does not have enough coins to buy " + property.getName());
                 }
             } else {
                 System.out.println(property.getName() + " is already owned by " + property.getOwner().getName());
-                Frame.locationLabelText(property.getName() + " is already owned by " + property.getOwner().getName());
+                //Frame.locationLabelText(property.getName() + " is already owned by " + property.getOwner().getName());
             }
         } 
     }

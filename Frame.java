@@ -6,7 +6,7 @@ public class Frame extends JFrame implements ActionListener {
     JButton rollButton, skipButton, buyButton;
     JButton[] playerButton = new JButton[3];
     JLabel label, plabel;
-    static JLabel locationLabel;
+    JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
     Font myFont = new Font("myFont", Font.BOLD, 23);
@@ -125,27 +125,22 @@ public class Frame extends JFrame implements ActionListener {
                 for (var i = 0; i < 3; i++) {
                     playerButton[i].setVisible(false);
                 }
+                GameUtils.runGame();
                 rollButton.setVisible(true);
                 label.setText(GameUtils.getCurrentPlayer().getName() + " starts. Roll!");
                 getPlayerLabels(); //Inserts the players Points on the right side
                 locationLabel.setVisible(true);
             }
         }
-        var rollResult = 0;
         //Rolls for turn, change turn to buystep/skipstep
         if (click.getSource() == rollButton) {
             turnRoll(false);
-            rollResult = Die.dieRoll();
-            GameUtils.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
-            label.setText(GameUtils.getCurrentPlayer().getName() + " rolled: " + rollResult);
-            GameUtils.getCurrentPlayer().move(rollResult);
+            GameUtils.rollEffect();
             getPlayerLabels();
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {
-            GameUtils.switchPlayer();
-            locationLabel.setText(GameUtils.getCurrentPlayer().getCurrentTileString()); //Tells the new player where they are standing. CHANGE INTEGER
-            label.setText(GameUtils.getCurrentPlayer().getName() + " it's your turn now, roll");
+            GameUtils.skipEffect();
             turnRoll(true);
         }
         if (click.getSource() == buyButton) {
@@ -170,7 +165,10 @@ public class Frame extends JFrame implements ActionListener {
         return pointsLabel;
     }
     //Tells the player location on Board
-    public static void locationLabelText(String input) {
+    public void locationLabelText(String input) {
         locationLabel.setText(input);
+    }
+    public void labelText(String input) {
+        label.setText(input);
     }
 }
