@@ -126,7 +126,6 @@ public class Frame extends JFrame implements ActionListener {
         if (click.getSource() == rollButton) {
             turnRoll(false);
             rollResult = Die.dieRoll();
-            Player.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
             label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
             GameUtils.move(rollResult);
             getPlayerLabels();
