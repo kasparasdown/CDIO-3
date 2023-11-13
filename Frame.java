@@ -134,7 +134,6 @@ public class Frame extends JFrame implements ActionListener {
         //Pass turn to next player
         if (click.getSource() == skipButton) {
             Player.switchPlayer();
-            locationLabel.setText(Integer.toString(Player.getCurrentPlayer().getLocation())); //Tells the new player where they are standing. CHANGE INTEGER
             label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }

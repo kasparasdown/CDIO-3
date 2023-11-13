@@ -24,7 +24,6 @@ public class Player {
                 break;
         }
         this.location = 0;
-        this.tiles = tiles;
         this.currentTile = tiles[location];
     }
 
@@ -69,6 +68,7 @@ public class Player {
 
     public static void switchPlayer() {
         playerIndex = (playerIndex + 1) % playerNumbers;
+        Frame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
     }
 
     public static Player getCurrentPlayer() {
