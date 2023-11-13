@@ -5,8 +5,12 @@ public class Player {
     private static Player[] players;
     private static int playerIndex = 0;
     private int location;
+    private Tiles[] tiles;
+    private Tiles currentTile;
 
-    public Player(String name, int location) {
+
+    public Player(String name) {
+        tiles = Tiles.getAllTiles();
         this.name = name;
         switch(playerNumbers) {
             case 2:
@@ -19,7 +23,9 @@ public class Player {
                 this.coin = 16;
                 break;
         }
-        this.location = location;
+        this.location = 0;
+        this.tiles = tiles;
+        this.currentTile = tiles[location];
     }
 
     public String getName() {
@@ -30,10 +36,14 @@ public class Player {
         return coin;
     }
     public int getLocation() {
-        return location;
+        return currentTile.getPos();
+    }
+    public Tiles getTile() {
+        return currentTile;
     }
     public void setLocation(int location) {
         this.location = location;
+        this.currentTile = tiles[location];
     }
 
     public void addCoins(int value) {
@@ -48,7 +58,7 @@ public class Player {
 
     public static Player[] createPlayers() {
         for (int i = 0; i < playerNumbers; i++) {
-            players[i] = new Player("Player " + (i + 1), 0);
+            players[i] = new Player("Player " + (i + 1));
         }
         return players;
     }

@@ -2,7 +2,7 @@
 public class Tiles {
     private int position;
     private String name;
-    private Tiles[] tiles;
+    static private Tiles[] tiles;
     private Player owner;
 
     public Tiles(int position, String name) {
@@ -30,7 +30,7 @@ public class Tiles {
     public void handleTileAction() {
         //empty, gonna override
     }
-    public Tiles[] getAllTiles() {
+    public static Tiles[] getAllTiles() {
         tiles = new Tiles[24];
         tiles[0] = new StartField(0,"Start", 2);
         tiles[1] = new PropertyField(1, "Bowlinghallen", 4);
