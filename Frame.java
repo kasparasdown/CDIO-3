@@ -136,6 +136,9 @@ public class Frame extends JFrame implements ActionListener {
             label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }
+        if (click.getSource() == buyButton) {
+            GameUtils.buyProperty();
+        }
     }
 
     //Call to get label with all the players points on.

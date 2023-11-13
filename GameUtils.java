@@ -12,4 +12,14 @@ public class GameUtils {
         Player.getCurrentPlayer().setLocation(newlocation);
         Frame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
     }
+    public static void buyProperty() {
+        var money = Player.getCurrentPlayer().getCoin();
+        Tiles tile = Player.getCurrentPlayer().getTile();
+        System.out.println(tile.getPrice());
+        if (money>tile.getPrice() && !tile.isOwned()) {
+            Player.getCurrentPlayer().addCoins(-tile.getPrice());
+            tile.setOwner(Player.getCurrentPlayer());
+            System.out.println(tile.getName()+" is now owned by"+tile.getOwner().getName());
+        }
+    }
 }
