@@ -31,7 +31,8 @@ public class Player {
     public int getLocation() {
         return location;
     }
-    public void setPlayerTilePos(int pos) {
+    public void setLocation(int location) {
+        this.location = location;
     }
 
     public void addCoins(int value) {
