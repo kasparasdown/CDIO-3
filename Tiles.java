@@ -3,16 +3,26 @@ public class Tiles {
     private int position;
     private String name;
     private Tiles[] tiles;
+    private Player owner;
 
     public Tiles(int position, String name) {
         this.position = position;
         this.name = name;
+        this.owner = null;        
     }
     public String getName() {
         return name;
     }
     public int getPos() {
         return position;
+    }
+    public Player getOwner() {
+        return this.owner;
+    }
+    public void setOwner(Player player) {
+        if (this.owner == null || this.owner != player){
+            this.owner = player;
+        }
     }
     public void setPos(int pos){
         position=pos;

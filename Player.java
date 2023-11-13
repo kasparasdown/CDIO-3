@@ -1,12 +1,12 @@
 public class Player {
-    String name;
-    int coin;
+    private String name;
+    private int coin;
     static int playerNumbers = 0;
     private static Player[] players;
     private static int playerIndex = 0;
     private int location;
 
-    public Player(String name) {
+    public Player(String name, int location) {
         this.name = name;
         switch(playerNumbers) {
             case 2:
@@ -19,7 +19,7 @@ public class Player {
                 this.coin = 16;
                 break;
         }
-        this.location = 0;
+        this.location = location;
     }
 
     public String getName() {
@@ -48,7 +48,7 @@ public class Player {
 
     public static Player[] createPlayers() {
         for (int i = 0; i < playerNumbers; i++) {
-            players[i] = new Player("Player " + (i + 1));
+            players[i] = new Player("Player " + (i + 1), 0);
         }
         return players;
     }
@@ -63,10 +63,6 @@ public class Player {
 
     public static Player getCurrentPlayer() {
         return players[playerIndex];
-    }
-    public void move(int roll) {
-        location = (location + roll) %24;
-        Frame.locationLabelText(Integer.toString(location)); //Changes the label in GUI to the location. CHANGE INT TO A TILE!
     }
 
     public void payRent(int rent) {
