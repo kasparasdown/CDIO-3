@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ChanceCardDeck {
-    private List<ChanceCard> cards;
+ /*    private List<ChanceCard> cards;
 
     public ChanceCardDeck() {
         cards = new ArrayList<>();
@@ -36,4 +36,5 @@ public class ChanceCardDeck {
     }
 
 
+*/
 }

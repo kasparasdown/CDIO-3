@@ -1,5 +1,5 @@
 abstract class ChanceCard {
-
+/* 
     private String description;
 
     public ChanceCard(String description) {
@@ -11,16 +11,17 @@ abstract class ChanceCard {
         return description;
     }
 
-    public abstract void perfrormAction(Player player) {
+   /*  public abstract void perfrormAction(Player player) {
 
     }
 
     public pullChanceCard() {
 
     }
+    */
 }
 
-
+/* 
 class AdvanceToStart extends ChanceCard() {
     public AdvanceToStart(){
         super("Advance to start, recive 2M");
@@ -163,7 +164,7 @@ class FreePinkOrDarkBlueTile extends ChanceCard {
 
     @Override
     public void perfrormAction(Player player) {
-        //player.move() to any orange
+        /*player.move() to any orange
         if(tile.isAvilable){
             tile.purchase;
         } else {
@@ -206,7 +207,7 @@ class FreeSkatepark extends ChanceCard {
 
     @Override
     public void perfrormAction(Player player) {
-        //player.move() to any orange
+        player.move() to any orange
         if(tile.isAvilable){
             tile.purchase;
         } else {
@@ -245,4 +246,4 @@ class FreeBrownOrYellowTile extends ChanceCard {
             player.payRent(2);
         }
     }
-}
+}*/
