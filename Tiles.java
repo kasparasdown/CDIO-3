@@ -29,7 +29,7 @@ public class Tiles {
         tiles[1] = new PropertyField(1, "Bowlinghallen", 2, 3);
         tiles[2] = new PropertyField(2, "Zoo2", 2, 3);
         tiles[3] = new PropertyField(3, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[4] = new PropertyField(2, "Zoo3", 2, 3);
+        tiles[4] = new PropertyField(4, "Zoo3", 2, 3);
         tiles[5] = new PropertyField(5, "Zoo4", 2, 3);
         tiles[6] = new PropertyField(6, "EMPTY", 2, 3);//CHANGE THIS
         tiles[7] = new PropertyField(7, "Zoo5", 2, 3);

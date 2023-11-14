@@ -1,3 +1,5 @@
+import javax.swing.JButton;
+
 public class GameUtils {
 
     public static void runGame() {

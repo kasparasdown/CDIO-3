@@ -101,13 +101,12 @@ public class Frame extends JFrame implements ActionListener {
     }
     //Switch between start of turn(rolling) and end of turn (buying or passing turn)
     public void turnRoll(boolean status) {
+            buyButtonVisible(false); //Reset buybutton
             skipButton.setVisible(!status);
             rollButton.setVisible(status);
             if(Player.getCurrentPlayer().getTile() instanceof PropertyField){
                 PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
-                System.out.println(tile.getName());
-                System.out.println(tile.isOwned());
-                if(!tile.isOwned()) {
+                if((!tile.isOwned()) && tile.getPrice()<=Player.getCurrentPlayer().getCoin()) {
                     buyButtonVisible(!status); //Change to true, when player is on a UnOwned Property!
                 }
             }
@@ -148,8 +147,8 @@ public class Frame extends JFrame implements ActionListener {
         }
         if (click.getSource() == buyButton) {
             GameUtils.buyProperty();
-            getPlayerLabels();
         }
+        getPlayerLabels();
     }
 
     //Call to get label with all the players points on.
