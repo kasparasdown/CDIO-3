@@ -49,6 +49,10 @@ public class Player {
         coin += value;
     }
 
+    public void removeCoins(int value) {
+        coin -= value;
+    }
+
     public static void totalPlayers(int numb) {
         playerNumbers = numb;
         players = new Player[playerNumbers]; // Initialize the players array
