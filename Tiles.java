@@ -8,6 +8,9 @@ public class Tiles {
         this.position = position;
         this.name = name;
     }
+    public String getType() {
+        return "Tile";
+    }
     public String getName() {
         return name;
     }

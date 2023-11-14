@@ -3,7 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Frame extends JFrame implements ActionListener {
-    JButton rollButton, skipButton, buyButton;
+    JButton rollButton, skipButton;
+    static JButton buyButton;
     JButton[] playerButton = new JButton[3];
     JLabel label, plabel;
     static JLabel locationLabel;
@@ -102,7 +103,17 @@ public class Frame extends JFrame implements ActionListener {
     public void turnRoll(boolean status) {
             skipButton.setVisible(!status);
             rollButton.setVisible(status);
-            if(true) buyButton.setVisible(!status); //Change to true, when player is on a UnOwned Property!
+            if(Player.getCurrentPlayer().getTile() instanceof PropertyField){
+                PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
+                System.out.println(tile.getName());
+                System.out.println(tile.isOwned());
+                if(!tile.isOwned()) {
+                    buyButtonVisible(!status); //Change to true, when player is on a UnOwned Property!
+                }
+            }
+    }
+    public static void buyButtonVisible(boolean status) {
+        buyButton.setVisible(status);
     }
 
     //Takes click from buttons, and do stuff
@@ -124,10 +135,10 @@ public class Frame extends JFrame implements ActionListener {
         var rollResult = 0;
         //Rolls for turn, change turn to buystep/skipstep
         if (click.getSource() == rollButton) {
-            turnRoll(false);
             rollResult = Die.dieRoll();
             label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
             GameUtils.move(rollResult);
+            turnRoll(false);
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {

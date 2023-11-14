@@ -21,6 +21,7 @@ public class GameUtils {
                 Player.getCurrentPlayer().addCoins(-tile.getPrice());
                 tile.setOwner(Player.getCurrentPlayer());
                 System.out.println(tile.getName()+" is now owned by"+tile.getOwner().getName());
+                Frame.buyButtonVisible(false);
             }
         }
         else {
