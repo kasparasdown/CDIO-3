@@ -9,6 +9,18 @@ public class Images {
                 case 1:
                     logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\burger.png");
                     return logo;
+                case 2:
+                    logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\2.png");
+                    return logo;
+                case 3:
+                    logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\3.png");
+                    return logo;
+                case 4:
+                    logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\4.png");
+                    return logo;
+                case 5:
+                    logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\5.png");
+                    return logo;
                 default:
                     logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\start.png");
                     return logo;

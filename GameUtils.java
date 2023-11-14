@@ -7,13 +7,15 @@ public class GameUtils {
         mainFrame = new Frame();
     }
     public static void move(int roll) {
-        var rollLocation = Player.getCurrentPlayer().getLocation() + roll;
+        var player = Player.getCurrentPlayer();
+        var rollLocation = player.getLocation() + roll;
         if (rollLocation >= 24) {
-            Player.getCurrentPlayer().addCoins(2);
+            player.addCoins(2);
         }
         var newlocation = (rollLocation) %24;
-        Player.getCurrentPlayer().setLocation(newlocation);
-        mainFrame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
+        player.setLocation(newlocation);
+        mainFrame.locationLabelText(player.getTile().getName());
+        mainFrame.setLogo(player.getLocation());
     }
     public static void buyProperty() {
         if(Player.getCurrentPlayer().getTile() instanceof PropertyField) {
@@ -33,7 +35,10 @@ public class GameUtils {
     }
 
     public static void switchPlayer() {
+        var player = Player.getCurrentPlayer();
         Player.setPlayerIndex((Player.getPlayerIndex() + 1) % Player.playerNumbers);
-        mainFrame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
+        mainFrame.locationLabelText(player.getTile().getName());
+        mainFrame.labelText(player.getName() + " it's your turn now, roll");
+        mainFrame.setLogo(player.getLocation());
     }
 }

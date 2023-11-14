@@ -29,7 +29,6 @@ public class Frame extends JFrame implements ActionListener {
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         logoLabel.setIcon(Images.getImageIcon(0));
         
-
         locationLabel = new JLabel("START");
         locationLabel.setFont(myFont);
         locationLabel.setBackground(Color.gray);
@@ -150,7 +149,6 @@ public class Frame extends JFrame implements ActionListener {
         //Pass turn to next player
         if (click.getSource() == skipButton) {
             GameUtils.switchPlayer();
-            label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }
         if (click.getSource() == buyButton) {
@@ -179,5 +177,11 @@ public class Frame extends JFrame implements ActionListener {
     //Tells the player location on Board
     public void locationLabelText(String input) {
         locationLabel.setText(input);
+    }
+    public void labelText(String input) {
+        label.setText(input);
+    }
+    public void setLogo(int numb) {
+        logoLabel.setIcon(Images.getImageIcon(numb));
     }
 }
