@@ -3,28 +3,10 @@ public class Tiles {
     private int position;
     private String name;
     static private Tiles[] tiles;
-    private Player owner;
-    private int price;
 
     public Tiles(int position, String name) {
         this.position = position;
         this.name = name;
-        this.owner = null;
-        this.price = price;
-    }
-    public int getPrice() {
-        return price;
-    }
-    public void setOwner(Player player) {
-        if (this.owner == null || this.owner != player){
-            this.owner = player;
-        }
-    }
-    public Player getOwner() {
-        return owner;
-    }
-    public boolean isOwned() {
-        return owner != null;
     }
     public String getName() {
         return name;
@@ -77,9 +59,10 @@ class PropertyField extends Tiles {
     private Player owner;
 
     public PropertyField(int position, String name, int rent, int price) {
-        super(position,name);
+        super(position, name);
         this.rent = rent;
         this.owner = null;
+        this.price = price;
     }
     //ownerCode for the property objects
     public Player getOwner() {
