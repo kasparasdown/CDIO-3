@@ -110,10 +110,10 @@ class ChanceField extends Tiles {
 }
 
 class StartField extends Tiles {
-    private int money;
+    //private int money;
     public StartField(int position, String name, int money) {
         super(0, "START");
-        this.money = 2;
+        //this.money = 2;
     }
 }
 
