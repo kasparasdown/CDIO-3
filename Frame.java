@@ -23,22 +23,11 @@ public class Frame extends JFrame implements ActionListener {
         label.setBorder(BorderFactory.createEmptyBorder(15, 0, 30, 0));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        try {
-            logo = new ImageIcon("CDIO\\CDIO3\\CDIO-3\\Image\\start.png");
-            Image image = logo.getImage(); // transform it 
-            Image newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-            logo = new ImageIcon(newimg);
-        }
-        catch (Exception e) {
-            System.out.println("something wrent wrong with logo");
-        }
-        System.out.println(new java.io.File("CDIO\\CDIO3\\CDIO-3\\Image\\start.png").exists());
-
         logoLabel = new JLabel();
         logoLabel.setVisible(true);
         logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 30, 0));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        logoLabel.setIcon(logo);
+        logoLabel.setIcon(Images.getImageIcon(0));
         
 
         locationLabel = new JLabel("START");
