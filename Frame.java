@@ -4,10 +4,10 @@ import javax.swing.*;
 
 public class Frame extends JFrame implements ActionListener {
     JButton rollButton, skipButton;
-    static JButton buyButton;
+    JButton buyButton;
     JButton[] playerButton = new JButton[3];
     JLabel label, plabel;
-    static JLabel locationLabel;
+    JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
     Font myFont = new Font("myFont", Font.BOLD, 23);
@@ -111,7 +111,7 @@ public class Frame extends JFrame implements ActionListener {
                 }
             }
     }
-    public static void buyButtonVisible(boolean status) {
+    public void buyButtonVisible(boolean status) {
         buyButton.setVisible(status);
     }
 
@@ -141,7 +141,7 @@ public class Frame extends JFrame implements ActionListener {
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {
-            Player.switchPlayer();
+            GameUtils.switchPlayer();
             label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
             turnRoll(true);
         }
@@ -169,7 +169,7 @@ public class Frame extends JFrame implements ActionListener {
         return pointsLabel;
     }
     //Tells the player location on Board
-    public static void locationLabelText(String input) {
+    public void locationLabelText(String input) {
         locationLabel.setText(input);
     }
 }

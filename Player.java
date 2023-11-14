@@ -70,16 +70,14 @@ public class Player {
         return players[number];
     }
 
-    public static void switchPlayer() {
-        playerIndex = (playerIndex + 1) % playerNumbers;
-        Frame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
-    }
-
     public static Player getCurrentPlayer() {
         return players[playerIndex];
     }
-
-    public void payRent(int rent) {
-        // gonna pay rent
+    //Checking current player in the array
+    public static int getPlayerIndex() {
+        return playerIndex;
+    }
+    public static void setPlayerIndex(int i) {
+        playerIndex = i;
     }
 }

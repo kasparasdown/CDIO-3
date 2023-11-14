@@ -1,9 +1,10 @@
-import javax.swing.JButton;
+
 
 public class GameUtils {
+    static Frame mainFrame;
 
     public static void runGame() {
-        new Frame();
+        mainFrame = new Frame();
     }
     public static void move(int roll) {
         var rollLocation = Player.getCurrentPlayer().getLocation() + roll;
@@ -12,7 +13,7 @@ public class GameUtils {
         }
         var newlocation = (rollLocation) %24;
         Player.getCurrentPlayer().setLocation(newlocation);
-        Frame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
+        mainFrame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
     }
     public static void buyProperty() {
         if(Player.getCurrentPlayer().getTile() instanceof PropertyField) {
@@ -23,11 +24,16 @@ public class GameUtils {
                 Player.getCurrentPlayer().addCoins(-tile.getPrice());
                 tile.setOwner(Player.getCurrentPlayer());
                 System.out.println(tile.getName()+" is now owned by"+tile.getOwner().getName());
-                Frame.buyButtonVisible(false);
+                mainFrame.buyButtonVisible(false);
             }
         }
         else {
             System.out.println("This is not a property");
         }
+    }
+
+    public static void switchPlayer() {
+        Player.setPlayerIndex((Player.getPlayerIndex() + 1) % Player.playerNumbers);
+        mainFrame.locationLabelText(Player.getCurrentPlayer().getTile().getName());
     }
 }
