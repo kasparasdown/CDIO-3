@@ -128,7 +128,6 @@ public class Frame extends JFrame implements ActionListener {
             rollResult = Die.dieRoll();
             label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
             GameUtils.move(rollResult);
-            getPlayerLabels();
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {
@@ -138,6 +137,7 @@ public class Frame extends JFrame implements ActionListener {
         }
         if (click.getSource() == buyButton) {
             GameUtils.buyProperty();
+            getPlayerLabels();
         }
     }
 
