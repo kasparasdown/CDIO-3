@@ -56,28 +56,6 @@ public class GameUtils {
         }
     }
 
-    private static void initializeChanceCards() {
-        chanceCards = new ChanceCard[]{
-            new ChanceCard("Advance to Start", null),
-            new ChanceCard("Move 5 tiles forward", null),
-            new ChanceCard("Move to Orange", null),
-            new ChanceCard("Move 1 tile or draw again", null),
-            new ChanceCard("To much candy", null),
-            new ChanceCard("Move to a orange or green tile", null),
-            new ChanceCard("Move to a light blue tile", null),
-            new ChanceCard("Get out of jail free card", null),
-            new ChanceCard("Move to beachpromenade", null),
-            new ChanceCard("Birthday boy", null),
-            new ChanceCard("Move to a pink or dark blue tile", null),
-            new ChanceCard("Homework done", null),
-            new ChanceCard("Move to a red tile", null),
-            new ChanceCard("Move to skatepark", null),
-            new ChanceCard("Move to a light blue or red tile", null),
-            new ChanceCard("Move to a brown or yellow tile", null),
-            
-        };
-    }
-
     private static void drawChanceCard() {
         Random random = new Random();
         int randomIndex = random.nextInt(chanceCards.length);

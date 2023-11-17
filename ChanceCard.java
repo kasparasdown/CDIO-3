@@ -84,24 +84,16 @@ public class ChanceCard {
     }
 
     private void moveOneTileForwardOrDrawAgain(){
+        //Only move
         int steps = 1;
         int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
-        if (click.getSource() == move1Button){
             player.setLocation(newPosition);
-        }// misses or draw again
     }
 
     private void moveToOrange(){
-        Tiles[] tiles = Tiles.getAllTiles();
         Player player = Player.getCurrentPlayer();
-        // make statement about player input.
-        if(click.getSource() == poolButton){ // figure out how to implement player input with frame.
-            player.setLocation(11);
-        } else if (click.getSource() == skateparkButton) {
             player.setLocation(10);
-        }
-
-        Tiles currentTile = tiles[player.getLocation()];
+        Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -115,19 +107,10 @@ public class ChanceCard {
     }
 
     private void orangeOrGreen(){
-        Tiles[] tiles = Tiles.getAllTiles();
+        //We only moving to green tile
         Player player = Player.getCurrentPlayer();
-        // statement about player input.
-        if (player.input == "orange 1" ){
-            player.setLocation(10);
-        } else if(player.input == "oragne 2"){
-            player.setLocation(11);
-        } else if (player.input == "green 1"){
             player.setLocation(19);
-        } else if (player.input == "green 2"){
-            player.setLocation(20);
-        }
-         Tiles currentTile = tiles[player.getLocation()];
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -137,16 +120,11 @@ public class ChanceCard {
     }
 
     private void lightBlueTile(){
-        Tiles[] tiles = Tiles.getAllTiles();
         Player player = Player.getCurrentPlayer();
         // input statement in frame
-        if (player.input == "light blue 1"){
             player.setLocation(4);
-        } else if (player.input == "light blue 2"){
-            player.setLocation(5);
-        }
 
-         Tiles currentTile = tiles[player.getLocation()];
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -160,11 +138,10 @@ public class ChanceCard {
     }
 
     private void beachPromenade(){
-        Tiles[] tiles = Tiles.getAllTiles();
         Player player = Player.getCurrentPlayer();
         player.setLocation(23);
 
-         Tiles currentTile = tiles[player.getLocation()];
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -179,19 +156,11 @@ public class ChanceCard {
     }
 
     private void pinkOrDarkBlue(){
-        Tiles[] tiles = Tiles.getAllTiles();
+        //Only moving to pink
         Player player = Player.getCurrentPlayer();
-
-        if (player.input == "pink 1" ){
             player.setLocation(7);
-        } else if(player.input == "pink 2"){
-            player.setLocation(8);
-        } else if (player.input == "dark blue 1"){
-            player.setLocation(22);
-        } else if (player.input == "dark blue 2"){
-            player.setLocation(23);
-        }
-         Tiles currentTile = tiles[player.getLocation()];
+
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -205,15 +174,9 @@ public class ChanceCard {
     }
 
     public void moveRed(){
-        Tiles[] tiles = Tiles.getAllTiles();
         Player player = Player.getCurrentPlayer();
-
-        if (player.input == "red 1"){
             player.setLocation(13);
-        } else if (player.input == "red 2"){
-            player.setLocation(14);    
-        }
-         Tiles currentTile = tiles[player.getLocation()];
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -224,11 +187,10 @@ public class ChanceCard {
     
 
     public void skatePark(){
-        Tiles[] tiles = Tiles.getAllTiles();
         Player player = Player.getCurrentPlayer();
 
         player.setLocation(10);
-         Tiles currentTile = tiles[player.getLocation()];
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -238,19 +200,11 @@ public class ChanceCard {
     }
 
     public void lightBlueOrRed(){
-        Tiles[] tiles = Tiles.getAllTiles();
+        //only lightBlue
         Player player = Player.getCurrentPlayer();
+        player.setLocation(4);
 
-        if (player.input == "light blue 1" ){
-            player.setLocation(4);
-        } else if(player.input == "light blue 2"){
-            player.setLocation(5);
-        } else if (player.input == "red 1"){
-            player.setLocation(13);
-        } else if (player.input == "red 2"){
-            player.setLocation(14);
-        }
-         Tiles currentTile = tiles[player.getLocation()];
+        Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
@@ -260,19 +214,11 @@ public class ChanceCard {
     }
 
     public void brownOrYellow(){
-        Tiles[] tiles = Tiles.getAllTiles();
+        //only brown
         Player player = Player.getCurrentPlayer();
 
-         if (player.input == "brown 1" ){
             player.setLocation(1);
-        } else if(player.input == "brown 2"){
-            player.setLocation(2);
-        } else if (player.input == "yellow 1"){
-            player.setLocation(16);
-        } else if (player.input == "yellow 2"){
-            player.setLocation(17);
-        }
-         Tiles currentTile = tiles[player.getLocation()];
+         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
             if ( !propertyTile.isOwned()){
