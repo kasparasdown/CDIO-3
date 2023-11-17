@@ -21,11 +21,28 @@ public class GameUtils {
         if(Player.getCurrentPlayer().getTile() instanceof PropertyField) {
             var money = Player.getCurrentPlayer().getCoin();
             PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
-            System.out.println(tile.getPrice());
             if (money>tile.getPrice() && !tile.isOwned()) {
                 Player.getCurrentPlayer().addCoins(-tile.getPrice());
                 tile.setOwner(Player.getCurrentPlayer());
                 System.out.println(tile.getName()+" is now owned by"+tile.getOwner().getName());
+                mainFrame.buyButtonVisible(false);
+            }
+        }
+        else {
+            System.out.println("This is not a property");
+        }
+    }
+    public static void payRent() {
+        if(Player.getCurrentPlayer().getTile() instanceof PropertyField) {
+            var money = Player.getCurrentPlayer().getCoin();
+            PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
+            System.out.println(tile.isOwned());
+            System.out.println(tile.getOwner().getName());
+            System.out.println();
+            if (money>tile.getRent() && tile.isOwned() && tile.getOwner() != tile.getOwner() ) {
+                Player.getCurrentPlayer().addCoins(-tile.getRent());
+                tile.getOwner().addCoins(+tile.getRent());
+                System.out.println(Player.getCurrentPlayer().getName()+" paid "+tile.getOwner().getName());
                 mainFrame.buyButtonVisible(false);
             }
         }
