@@ -4,12 +4,11 @@ public class ChanceCard {
     private Player player;
    
 
-    Random random = new Random();
+    Random rand = new Random();
 
-    public ChanceCard(String description, Player player){
-        this.description = description;
-        this.player = player;
-    
+    public ChanceCard(){
+        //this.description = description;
+        //this.player = player;
     }
 
     public String getName(){
@@ -17,59 +16,60 @@ public class ChanceCard {
     }
     
    
-    public void performCardAction(){
-        switch(description){
-            case "Advance to Start":
+    public String performCardAction(){
+        int index = rand.nextInt(16)+1;
+        switch(index){
+            case 1:
                 advanceToGo();
-                break;
-            case "Move 5 tiles forward":
+                return "Advance to Start";
+            case 2:
                 move5TilesForward();
-                break;
-            case "Move to Orange":
+                return "Move 5 tiles forward";
+            case 3:
                 moveToOrange();
-                break;
-            case "Move 1 tile forward or draw again":
+                return "Move to Orange";
+            case 4:
                 moveOneTileForwardOrDrawAgain();
-                break;
-            case "To much candy":
+                return "Move 1 tile forward or draw again";
+            case 5:
                 toMuchCandy();
-                break;
-            case "Move to a orange or green tile":
+                return "To much candy";
+            case 6:
                 orangeOrGreen();
-                break;
-            case "Move to a light blue tile":
+                return "Move to a orange or green tile";
+            case 7:
                 lightBlueTile();
-                break;
-            case "Get out of jail free card":
+                return "Move to a light blue tile";
+            case 8:
                 acquireGetOutOfJailFreeCard();
-                break;
-            case "Move to beachpromenade":
+                return "Get out of jail free card";
+            case 9:
                 beachPromenade();
-                break;
-            case "Birthday boy":
+                return "Advance to Start";
+            case 10:
                 birthday();
-                break;
-            case "Move to a pink or dark blue tile":
+                return "Birthday boy";
+            case 11:
                 pinkOrDarkBlue();
-                break;
-            case "homework done":
+                return "Move to a pink or dark blue tile";
+            case 12:
                 homeworkDone();
-                break;
-            case "Move to a red tile":
+                return "homework done";
+            case 13:
                 moveRed();
-                break;
-            case "Move to skatepark":
+                return "Move to a red tile";
+            case 14:
                 skatePark();
-                break;
-            case "Move to a ligth blue or red tile":
+                return "Move to skatepark";
+            case 15:
                 lightBlueOrRed();
-                break;
-            case "Move to a brown or yellow tile":
+                return "Move to a ligth blue or red tile";
+            case 16:
                 brownOrYellow();
-                break;
+                return "Move to a brown or yellow tile";
             default:
                 System.out.println("unrecongized chance card " + description);
-                break;
+                return "Advance to Start";
                 }
     }
     

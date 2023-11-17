@@ -112,6 +112,9 @@ class ChanceField extends Tiles {
     public ChanceField(int position, String name) {
         super(position, name);
     }
+    //call a random card, from the chancecard class
+    public void handleTileAction() {
+    }
 }
 
 class StartField extends Tiles {
@@ -119,23 +122,5 @@ class StartField extends Tiles {
     public StartField(int position, String name, int money) {
         super(0, "START");
         //this.money = 2;
-    }
-}
-
-// ChanceCard.java
-class ChanceCard {
-    private String description;
-
-    public ChanceCard(String description) {
-        this.description = description;
-    }
-
-    // Getters...
-
-    @Override
-    public String toString() {
-        return "ChanceCard{" +
-                "description='" + description + '\'' +
-                '}';
     }
 }

@@ -17,7 +17,11 @@ public class GameUtils {
         player.setLocation(newlocation);
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
+        if(player.getTile() instanceof ChanceField) {
+            var card = new ChanceCard();
+        }
     }
+
     public static void buyProperty() {
         if(Player.getCurrentPlayer().getTile() instanceof PropertyField) {
             var money = Player.getCurrentPlayer().getCoin();
