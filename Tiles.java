@@ -26,29 +26,29 @@ public class Tiles {
     public static Tiles[] getAllTiles() {
         tiles = new Tiles[24];
         tiles[0] = new StartField(0,"Start", 2);
-        tiles[1] = new PropertyField(1, "Bowlinghallen", 2, 3);
+        tiles[1] = new PropertyField(1, "Bowlinghallen1", 2, 3);
         tiles[2] = new PropertyField(2, "Zoo2", 2, 3);
-        tiles[3] = new PropertyField(3, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[4] = new PropertyField(4, "Zoo3", 2, 3);
-        tiles[5] = new PropertyField(5, "Zoo4", 2, 3);
-        tiles[6] = new PropertyField(6, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[7] = new PropertyField(7, "Zoo5", 2, 3);
-        tiles[8] = new PropertyField(8, "Zoo6", 2, 3);
-        tiles[9] = new PropertyField(9, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[10] = new PropertyField(10, "Zoo7", 2, 3);
-        tiles[11] = new PropertyField(11, "Zoo8", 2, 3);
-        tiles[12] = new PropertyField(12, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[13] = new PropertyField(13, "Zoo9", 2, 3);
-        tiles[14] = new PropertyField(14, "Zoo10", 2, 3);
-        tiles[15] = new PropertyField(15, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[16] = new PropertyField(16, "Zoo11", 2, 3);
-        tiles[17] = new PropertyField(17, "Zoo12", 2, 3);
-        tiles[18] = new PropertyField(18, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[19] = new PropertyField(19, "Zoo13", 2, 3);
-        tiles[20] = new PropertyField(20, "Zoo14", 2, 3);
-        tiles[21] = new PropertyField(21, "EMPTY", 2, 3);//CHANGE THIS
-        tiles[22] = new PropertyField(22, "Zoo15", 2, 3);
-        tiles[23] = new PropertyField(23, "Zoo16", 2, 3);
+        tiles[3] = new ChanceField(3, "Chancefield");//CHANGE THIS
+        tiles[4] = new PropertyField(4, "Zoo4", 2, 3);
+        tiles[5] = new PropertyField(5, "Zoo5", 2, 3);
+        tiles[6] = new PropertyField(6, "Zoo6", 2, 3);//CHANGE THIS
+        tiles[7] = new PropertyField(7, "Zoo7", 2, 3);
+        tiles[8] = new PropertyField(8, "Zoo8", 2, 3);
+        tiles[9] = new ChanceField(9, "Chancefield");
+        tiles[10] = new PropertyField(10, "Zoo10", 2, 3);
+        tiles[11] = new PropertyField(11, "Zoo11", 2, 3);
+        tiles[12] = new PropertyField(12, "Zoo12", 2, 3);//CHANGE THIS
+        tiles[13] = new PropertyField(13, "Zoo13", 2, 3);
+        tiles[14] = new PropertyField(14, "Zoo14", 2, 3);
+        tiles[15] = new ChanceField(15, "Chancefield");
+        tiles[16] = new PropertyField(16, "Zoo16", 2, 3);
+        tiles[17] = new PropertyField(17, "Zoo17", 2, 3);
+        tiles[18] = new PropertyField(18, "Zoo18", 2, 3);//CHANGE THIS
+        tiles[19] = new PropertyField(19, "Zoo19", 2, 3);
+        tiles[20] = new PropertyField(20, "Zoo20", 2, 3);
+        tiles[21] = new ChanceField(21, "Chancefield");
+        tiles[22] = new PropertyField(22, "Zoo22", 2, 3);
+        tiles[23] = new PropertyField(23, "Zoo23", 2, 3);
         return tiles;
     }
     public String toString() {

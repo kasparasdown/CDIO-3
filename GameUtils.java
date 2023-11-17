@@ -17,8 +17,10 @@ public class GameUtils {
         player.setLocation(newlocation);
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
+        System.out.println(player.getTile().getName());
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
+            System.out.println(card.performCardAction());
         }
     }
 

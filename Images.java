@@ -35,7 +35,6 @@ public class Images {
     }
 
     public static ImageIcon getImageIcon(int number) {
-        System.out.println(new java.io.File("CDIO\\CDIO3\\CDIO-3\\Image\\start.png").exists()); //check if exist in log
     try {
         logo = chooseIcon(number);
         Image image = logo.getImage(); // transform it 

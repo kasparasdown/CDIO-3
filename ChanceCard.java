@@ -74,11 +74,12 @@ public class ChanceCard {
     }
     
     private void advanceToGo(){
-        player.setLocation(0);
+        Player.getCurrentPlayer().setLocation(0);
     }
 
     private void move5TilesForward(){
         int steps = 5;
+        var player = Player.getCurrentPlayer();
         int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
         player.setLocation(newPosition);
     }
@@ -86,6 +87,7 @@ public class ChanceCard {
     private void moveOneTileForwardOrDrawAgain(){
         //Only move
         int steps = 1;
+        var player = Player.getCurrentPlayer();
         int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
             player.setLocation(newPosition);
     }
@@ -103,6 +105,7 @@ public class ChanceCard {
     }
 
     private void toMuchCandy(){
+        var player = Player.getCurrentPlayer();
         player.removeCoins(2);
     }
 
@@ -151,8 +154,7 @@ public class ChanceCard {
     }
 
     private void birthday(){
-        //text needed
-        player.addCoins(1);
+        Player.getCurrentPlayer().addCoins(1);
     }
 
     private void pinkOrDarkBlue(){
@@ -170,6 +172,7 @@ public class ChanceCard {
     }
 
     public void homeworkDone(){
+        var player = Player.getCurrentPlayer();
         player.addCoins(2);
     }
 
