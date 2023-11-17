@@ -6,7 +6,7 @@ public class Frame extends JFrame implements ActionListener {
     JButton rollButton, skipButton;
     JButton buyButton;
     JButton[] playerButton = new JButton[3];
-    JLabel label, plabel, logoLabel;
+    JLabel label, plabel, logoLabel, cardLabel;
     JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
@@ -20,12 +20,19 @@ public class Frame extends JFrame implements ActionListener {
         label.setFont(myFont);
         label.setBackground(Color.gray);
         label.setVisible(true);
-        label.setBorder(BorderFactory.createEmptyBorder(15, 0, 30, 0));
+        label.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        cardLabel = new JLabel("Choose the number of players");
+        cardLabel.setFont(myFont);
+        cardLabel.setBackground(Color.gray);
+        cardLabel.setVisible(false);
+        cardLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         logoLabel = new JLabel();
         logoLabel.setVisible(true);
-        logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 30, 0));
+        logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         logoLabel.setIcon(Images.getImageIcon(0));
         
@@ -104,6 +111,7 @@ public class Frame extends JFrame implements ActionListener {
         midPanel.add(label);
         midPanel.add(locationLabel);
         midPanel.add(logoLabel);
+        midPanel.add(cardLabel);
 
     }
     //Switch between start of turn(rolling) and end of turn (buying or passing turn)
@@ -120,6 +128,10 @@ public class Frame extends JFrame implements ActionListener {
     }
     public void buyButtonVisible(boolean status) {
         buyButton.setVisible(status);
+    }
+    public void setChanceCard(boolean visible, String text) {
+        cardLabel.setVisible(visible);
+        cardLabel.setText(text);
     }
 
     //Takes click from buttons, and do stuff

@@ -20,7 +20,9 @@ public class GameUtils {
         System.out.println(player.getTile().getName());
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
-            System.out.println(card.performCardAction());
+            String str = card.performCardAction();
+            System.out.println(str);
+            mainFrame.setChanceCard(true, str);
         }
     }
 
@@ -67,6 +69,7 @@ public class GameUtils {
     }
 
     public static void switchPlayer() {
+        mainFrame.setChanceCard(false, null);
         var player = Player.getCurrentPlayer();
         Player.setPlayerIndex((Player.getPlayerIndex() + 1) % Player.playerNumbers);
         mainFrame.locationLabelText(player.getTile().getName());
