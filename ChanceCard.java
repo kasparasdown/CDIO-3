@@ -1,249 +1,284 @@
-abstract class ChanceCard {
-/* 
+import java.util.Random;
+public class ChanceCard {
     private String description;
+    private Player player;
+   
 
-    public ChanceCard(String description) {
+    Random random = new Random();
+
+    public ChanceCard(String description, Player player){
         this.description = description;
-
+        this.player = player;
+    
     }
 
-    public String getDescription() {
+    public String getName(){
         return description;
     }
-
-   /*  public abstract void perfrormAction(Player player) {
-
+    
+   
+    public void performCardAction(){
+        switch(description){
+            case "Advance to Start":
+                advanceToGo();
+                break;
+            case "Move 5 tiles forward":
+                move5TilesForward();
+                break;
+            case "Move to Orange":
+                moveToOrange();
+                break;
+            case "Move 1 tile forward or draw again":
+                moveOneTileForwardOrDrawAgain();
+                break;
+            case "To much candy":
+                toMuchCandy();
+                break;
+            case "Move to a orange or green tile":
+                orangeOrGreen();
+                break;
+            case "Move to a light blue tile":
+                lightBlueTile();
+                break;
+            case "Get out of jail free card":
+                acquireGetOutOfJailFreeCard();
+                break;
+            case "Move to beachpromenade":
+                beachPromenade();
+                break;
+            case "Birthday boy":
+                birthday();
+                break;
+            case "Move to a pink or dark blue tile":
+                pinkOrDarkBlue();
+                break;
+            case "homework done":
+                homeworkDone();
+                break;
+            case "Move to a red tile":
+                moveRed();
+                break;
+            case "Move to skatepark":
+                skatePark();
+                break;
+            case "Move to a ligth blue or red tile":
+                lightBlueOrRed();
+                break;
+            case "Move to a brown or yellow tile":
+                brownOrYellow();
+                break;
+            default:
+                System.out.println("unrecongized chance card " + description);
+                break;
+                }
+    }
+    
+    private void advanceToGo(){
+        player.setLocation(0);
     }
 
-    public pullChanceCard() {
-
-    }
-    */
-}
-
-/* 
-class AdvanceToStart extends ChanceCard() {
-    public AdvanceToStart(){
-        super("Advance to start, recive 2M");
+    private void move5TilesForward(){
+        int steps = 5;
+        int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
+        player.setLocation(newPosition);
     }
 
-    @Override
-    public void perfrormAction(Player player) {
-        player.addCoins(2);
-        player.location = StartField(); 
-        System.out.println(player.getName() + "advances to start. recive 2M");
-    }
-}
-
-class Move5 extends ChanceCard {
-    public Move5(){
-        super("Move 5 tiles forward.");
-    }
-    @Override
-    public void perfrormAction(Player player) {
-        player.location += 5;
-        System.out.println("You moved forward 5 tiles.");
+    private void moveOneTileForwardOrDrawAgain(){
+        int steps = 1;
+        int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
+        if (click.getSource() == move1Button){
+            player.setLocation(newPosition);
+        }// misses or draw again
     }
 
-}
+    private void moveToOrange(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
+        // make statement about player input.
+        if(click.getSource() == poolButton){ // figure out how to implement player input with frame.
+            player.setLocation(11);
+        } else if (click.getSource() == skateparkButton) {
+            player.setLocation(10);
+        }
 
-class FreeOrangeTile extends ChanceCard {
-    public FreeOrangeTile(){
-        super("Advance to a Orange tile, if available you get it for free, if already owned you have to pay rent");
-    }
-
-    @Override
-    public void perfrormAction(Player player) {
-        //player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+        Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
 
-class MoveForward1 extends ChanceCard {
-    public MoveForward1(){
-        super("Move back one tile, or take another card");
-    }
-
-    @Override
-    public void perfrormAction(Player player) {
-        if(s.nexLine == move){
-            player.location += 1;
-        } else if (s.nextLine == ChanceCard) {
-            player.getChanceCard;
-        }
-        
-    }
-}
-
-class ToMuchCandy extends ChanceCard() {
-    public ToMuchCandy(){
-        super("you ate to much candy, pay 2M");
-    }
-
-    @Override
-    public void perfrormAction(Player player) {
+    private void toMuchCandy(){
         player.removeCoins(2);
-        System.out.println(player.getName() + "pays 2M");
-    }
-}
-
-class FreeOrangeOrGreenTile extends ChanceCard {
-    public FreeOrangeOrGreenTile(){
-        super("Advance to a Orange or Green tile, if available you get it for free, if already owned you have to pay rent");
     }
 
-    @Override
-    public void perfrormAction(Player player) {
-        //player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+    private void orangeOrGreen(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
+        // statement about player input.
+        if (player.input == "orange 1" ){
+            player.setLocation(10);
+        } else if(player.input == "oragne 2"){
+            player.setLocation(11);
+        } else if (player.input == "green 1"){
+            player.setLocation(19);
+        } else if (player.input == "green 2"){
+            player.setLocation(20);
+        }
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
 
-class FreeLightBlueTile extends ChanceCard {
-    public FreeLightBlueTile(){
-        super("Advance to a LightBlue tile, if available you get it for free, if already owned you have to pay rent");
-    }
+    private void lightBlueTile(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
+        // input statement in frame
+        if (player.input == "light blue 1"){
+            player.setLocation(4);
+        } else if (player.input == "light blue 2"){
+            player.setLocation(5);
+        }
 
-    @Override
-    public void perfrormAction(Player player) {
-        //player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
 
-class GetOutJailFree extends ChanceCard {
-    public GetOutJailFree(){
-        super("Get out of Jail free card, keep this card til you need it");
-
+    private void acquireGetOutOfJailFreeCard(){
+        Player.getCurrentPlayer().acquireGetOutOfJailFreeCard();
     }
 
-    @Override
-    public void perfrormAction(Player player) {
-        player.GetOutJailFree();
-    }
-}
+    private void beachPromenade(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
+        player.setLocation(23);
 
-class MoveToBeachPromenade extends ChanceCard {
-    public MoveToBeachPromenade(){
-        super("Move to Beach Promenade");
-    }
-
-    @Override
-    public void perfrormAction(Player player) {
-        player.setCurrentLocation(new Location(BeachPromenade));
-    }
-}
-
-class Birthday extends ChanceCard() {
-    public Birthday(){
-        super("its your birthday! recieve 1M");
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
+        }
     }
 
-    @Override
-    public void perfrormAction(Player player) {
+    private void birthday(){
+        //text needed
         player.addCoins(1);
     }
-}
 
-class FreePinkOrDarkBlueTile extends ChanceCard {
-    public FreePinkOrDarkBlueTile(){
-        super("Advance to a Pink or Dark Blue tile, if available you get it for free, if already owned you have to pay rent");
-    }
+    private void pinkOrDarkBlue(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
 
-    @Override
-    public void perfrormAction(Player player) {
-        /*player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+        if (player.input == "pink 1" ){
+            player.setLocation(7);
+        } else if(player.input == "pink 2"){
+            player.setLocation(8);
+        } else if (player.input == "dark blue 1"){
+            player.setLocation(22);
+        } else if (player.input == "dark blue 2"){
+            player.setLocation(23);
+        }
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
 
-class HomeworkDone extends ChanceCard() {
-    public HomeworkDone(){
-        super("You finished all your homework! recieve 2M");
-    }
-
-    @Override
-    public void perfrormAction(Player player) {
+    public void homeworkDone(){
         player.addCoins(2);
     }
-}
 
-class FreeRedTile extends ChanceCard {
-    public FreeRedTile(){
-        super("Advance to a Red tile, if available you get it for free, if already owned you have to pay rent");
-    }
+    public void moveRed(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
 
-    @Override
-    public void perfrormAction(Player player) {
-        //player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+        if (player.input == "red 1"){
+            player.setLocation(13);
+        } else if (player.input == "red 2"){
+            player.setLocation(14);    
+        }
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
+    
 
-class FreeSkatepark extends ChanceCard {
-    public FreeSkatepark(){
-        super("Move to the skate park and hit the most gnarly grind, if available you get it for free! If already owned you have to pay rent");
-    }
+    public void skatePark(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
 
-    @Override
-    public void perfrormAction(Player player) {
-        player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+        player.setLocation(10);
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
 
-class FreeLightBlueOrRedTile extends ChanceCard {
-    public FreeLightBlueOrRedTile(){
-        super("Advance to a LightBlue or red tile, if available you get it for free, if already owned you have to pay rent");
-    }
+    public void lightBlueOrRed(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
 
-    @Override
-    public void perfrormAction(Player player) {
-        //player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+        if (player.input == "light blue 1" ){
+            player.setLocation(4);
+        } else if(player.input == "light blue 2"){
+            player.setLocation(5);
+        } else if (player.input == "red 1"){
+            player.setLocation(13);
+        } else if (player.input == "red 2"){
+            player.setLocation(14);
+        }
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}
 
-class FreeBrownOrYellowTile extends ChanceCard {
-    public FreeBrownOrYellowTile(){
-        super("Advance to a brown or Yellow tile, if available you get it for free, if already owned you have to pay rent");
-    }
+    public void brownOrYellow(){
+        Tiles[] tiles = Tiles.getAllTiles();
+        Player player = Player.getCurrentPlayer();
 
-    @Override
-    public void perfrormAction(Player player) {
-        //player.move() to any orange
-        if(tile.isAvilable){
-            tile.purchase;
-        } else {
-            player.payRent(2);
+         if (player.input == "brown 1" ){
+            player.setLocation(1);
+        } else if(player.input == "brown 2"){
+            player.setLocation(2);
+        } else if (player.input == "yellow 1"){
+            player.setLocation(16);
+        } else if (player.input == "yellow 2"){
+            player.setLocation(17);
+        }
+         Tiles currentTile = tiles[player.getLocation()];
+        if (currentTile instanceof PropertyField){
+            PropertyField propertyTile = (PropertyField) currentTile;
+            if ( !propertyTile.isOwned()){
+                propertyTile.makeFree();
+            }
         }
     }
-}*/
+
+}

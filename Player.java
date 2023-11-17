@@ -7,6 +7,7 @@ public class Player {
     private int location;
     private Tiles[] tiles;
     private Tiles currentTile;
+    private boolean hasGetOutOfJailFreeCard;
 
 
     public Player(String name) {
@@ -25,6 +26,19 @@ public class Player {
         }
         this.location = 0;
         this.currentTile = tiles[location];
+        this.hasGetOutOfJailFreeCard = false;
+    }
+
+    public boolean hasgetOutOfJailFreeCard() {
+        return hasGetOutOfJailFreeCard;
+    }
+
+    public void useGetOutOfJailFreeCard() {
+        hasGetOutOfJailFreeCard = false;
+    }
+
+    public void acquireGetOutOfJailFreeCard() {
+        hasGetOutOfJailFreeCard = true;
     }
 
     public String getName() {

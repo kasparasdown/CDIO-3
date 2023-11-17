@@ -85,6 +85,11 @@ class PropertyField extends Tiles {
         return price;
     }
 
+    public void makeFree() {
+        this.price = 0;
+        
+    }
+
     public boolean isOwned() {
         return owner != null;
     }
