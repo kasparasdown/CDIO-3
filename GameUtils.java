@@ -6,7 +6,6 @@ public class GameUtils {
 
     public static void runGame() {
         mainFrame = new Frame();
-        initializeChanceCards();
     }
     public static void move(int roll) {
         var player = Player.getCurrentPlayer();
