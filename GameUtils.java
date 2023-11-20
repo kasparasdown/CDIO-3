@@ -70,8 +70,8 @@ public class GameUtils {
 
     public static void switchPlayer() {
         mainFrame.setChanceCard(false, null);
-        var player = Player.getCurrentPlayer();
         Player.setPlayerIndex((Player.getPlayerIndex() + 1) % Player.playerNumbers);
+        var player = Player.getCurrentPlayer();
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.labelText(player.getName() + " it's your turn now, roll");
         mainFrame.setLogo(player.getLocation());
