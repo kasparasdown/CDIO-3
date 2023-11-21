@@ -121,7 +121,7 @@ public class Frame extends JFrame implements ActionListener {
             rollButton.setVisible(status);
             if(Player.getCurrentPlayer().getTile() instanceof PropertyField){
                 PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
-                if((!tile.isOwned()) && tile.getPrice()<=Player.getCurrentPlayer().getCoin()) {
+                if((!tile.isOwned()) && tile.getPrice()<Player.getCurrentPlayer().getCoin()) {
                     buyButtonVisible(!status); //Change to true, when player is on a UnOwned Property!
                 }
             }

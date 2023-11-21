@@ -42,17 +42,17 @@ public class Player {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getCoin() {
-        return coin;
+        return this.coin;
     }
     public int getLocation() {
-        return currentTile.getPos();
+        return this.currentTile.getPos();
     }
     public Tiles getTile() {
-        return currentTile;
+        return tiles[this.location];
     }
     public void setLocation(int location) {
         this.location = location;
@@ -60,11 +60,11 @@ public class Player {
     }
 
     public void addCoins(int value) {
-        coin += value;
+        this.coin += value;
     }
 
     public void removeCoins(int value) {
-        coin -= value;
+        this.coin -= value;
     }
 
     public static void totalPlayers(int numb) {
@@ -77,6 +77,9 @@ public class Player {
         for (int i = 0; i < playerNumbers; i++) {
             players[i] = new Player("Player " + (i + 1));
         }
+        return players;
+    }
+    public static Player[] getPlayers() {
         return players;
     }
 

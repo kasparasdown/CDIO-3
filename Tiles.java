@@ -26,29 +26,29 @@ public class Tiles {
     public static Tiles[] getAllTiles() {
         tiles = new Tiles[24];
         tiles[0] = new StartField(0,"Start");
-        tiles[1] = new PropertyField(1, "Bowlinghallen1", 2, 3);
-        tiles[2] = new PropertyField(2, "Zoo2", 2, 3);
+        tiles[1] = new PropertyField(1, "Bowlinghallen1", 2, 3, null);
+        tiles[2] = new PropertyField(2, "Zoo2", 2, 3, null);
         tiles[3] = new ChanceField(3, "Chancefield");//CHANGE THIS
-        tiles[4] = new PropertyField(4, "Zoo4", 2, 3);
-        tiles[5] = new PropertyField(5, "Zoo5", 2, 3);
-        tiles[6] = new PropertyField(6, "Zoo6", 2, 3);//CHANGE THIS
-        tiles[7] = new PropertyField(7, "Zoo7", 2, 3);
-        tiles[8] = new PropertyField(8, "Zoo8", 2, 3);
+        tiles[4] = new PropertyField(4, "Zoo4", 2, 3, null);
+        tiles[5] = new PropertyField(5, "Zoo5", 2, 3, null);
+        tiles[6] = new PropertyField(6, "Zoo6", 2, 3, null);//CHANGE THIS
+        tiles[7] = new PropertyField(7, "Zoo7", 2, 3, null);
+        tiles[8] = new PropertyField(8, "Zoo8", 2, 3, null);
         tiles[9] = new ChanceField(9, "Chancefield");
-        tiles[10] = new PropertyField(10, "Zoo10", 2, 3);
-        tiles[11] = new PropertyField(11, "Zoo11", 2, 3);
-        tiles[12] = new PropertyField(12, "Zoo12", 2, 3);//CHANGE THIS
-        tiles[13] = new PropertyField(13, "Zoo13", 2, 3);
-        tiles[14] = new PropertyField(14, "Zoo14", 2, 3);
+        tiles[10] = new PropertyField(10, "Zoo10", 2, 3, null);
+        tiles[11] = new PropertyField(11, "Zoo11", 2, 3, null);
+        tiles[12] = new PropertyField(12, "Zoo12", 2, 3, null);//CHANGE THIS
+        tiles[13] = new PropertyField(13, "Zoo13", 2, 3, null);
+        tiles[14] = new PropertyField(14, "Zoo14", 2, 3, null);
         tiles[15] = new ChanceField(15, "Chancefield");
-        tiles[16] = new PropertyField(16, "Zoo16", 2, 3);
-        tiles[17] = new PropertyField(17, "Zoo17", 2, 3);
-        tiles[18] = new PropertyField(18, "Zoo18", 2, 3);//CHANGE THIS
-        tiles[19] = new PropertyField(19, "Zoo19", 2, 3);
-        tiles[20] = new PropertyField(20, "Zoo20", 2, 3);
+        tiles[16] = new PropertyField(16, "Zoo16", 2, 3, null);
+        tiles[17] = new PropertyField(17, "Zoo17", 2, 3, null);
+        tiles[18] = new PropertyField(18, "Zoo18", 2, 3, null);//CHANGE THIS
+        tiles[19] = new PropertyField(19, "Zoo19", 2, 3, null);
+        tiles[20] = new PropertyField(20, "Zoo20", 2, 3, null);
         tiles[21] = new ChanceField(21, "Chancefield");
-        tiles[22] = new PropertyField(22, "Zoo22", 2, 3);
-        tiles[23] = new PropertyField(23, "Zoo23", 2, 3);
+        tiles[22] = new PropertyField(22, "Zoo22", 2, 3, null);
+        tiles[23] = new PropertyField(23, "Zoo23", 2, 3, null);
         return tiles;
     }
     public String toString() {
@@ -61,37 +61,40 @@ class PropertyField extends Tiles {
     private int price;
     private Player owner;
 
-    public PropertyField(int position, String name, int rent, int price) {
+    public PropertyField(int position, String name, int rent, int price, Player owner) {
         super(position, name);
         this.rent = rent;
         this.owner = null;
         this.price = price;
+        this.owner = owner;
     }
     //ownerCode for the property objects
     public Player getOwner() {
-        return owner;
+        return this.owner;
     }
 
     public void setOwner(Player player) {
-        if (this.owner == null || this.owner != player){
-            this.owner = player;
+        if (this.owner == null) {
+        this.owner = player;
+        } 
+        else if (this.owner != player) {
+        this.owner = player;
         }
     }
 
     public int getRent() {
-        return rent;
+        return this.rent;
     }
     public int getPrice() {
-        return price;
+        return this.price;
     }
 
     public void makeFree() {
         this.price = 0;
-        
     }
 
     public boolean isOwned() {
-        return owner != null;
+        return this.owner != null;
     }
     @Override
     public void handleTileAction(){

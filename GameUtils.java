@@ -21,6 +21,10 @@ public class GameUtils {
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
         System.out.println(player.getTile().getName());
+        payRent();
+        if(player.getCoin()<=0) {
+            checkWinner();
+        }
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
             String str = card.performCardAction();
@@ -45,22 +49,19 @@ public class GameUtils {
         }
     }
     public static void payRent() {
-        if(Player.getCurrentPlayer().getTile() instanceof PropertyField) {
-            var money = Player.getCurrentPlayer().getCoin();
-            PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
+        var player = Player.getCurrentPlayer();
+        if(player.getTile() instanceof PropertyField) {
+            var money = player.getCoin();
+            PropertyField tile = (PropertyField) player.getTile();
             System.out.println(tile.isOwned());
-            System.out.println(tile.getOwner().getName());
-            System.out.println();
-            if (money>tile.getRent() && tile.isOwned() && tile.getOwner() != tile.getOwner() ) {
+            if(tile.isOwned()) System.out.println(tile.getOwner().getName());
+            if (tile.isOwned()) {
                 Player.getCurrentPlayer().addCoins(-tile.getRent());
-                tile.getOwner().addCoins(+tile.getRent());
+                tile.getOwner().addCoins(0);
                 System.out.println(Player.getCurrentPlayer().getName()+" paid "+tile.getOwner().getName());
                 mainFrame.buyButtonVisible(false);
-                checkWinner();
+                System.out.println(Player.getCurrentPlayer().getName()+" paid 2M to "+tile.getOwner().getName());
             }
-        }
-        else {
-            System.out.println("This is not a property");
         }
     }
 
@@ -81,20 +82,43 @@ public class GameUtils {
         mainFrame.setLogo(player.getLocation());
     }
     public static void checkWinner() {
-        Player winner = Player.getPlayerNumb(0);
-        for(var i=0; i<Player.playerNumbers; i++) {
-            var nextPlayer = (i < Player.playerNumbers) ? Player.getPlayerNumb(i+1) : Player.getPlayerNumb(i);
-            var player = Player.getPlayerNumb(i);
-            if(player.getCoin()<=nextPlayer.getCoin()) {
-                winner = nextPlayer;
-            }
+    Player[] winner = new Player[Player.playerNumbers];
+    Player nextPlayer = Player.getPlayerNumb(1);
+    var index = 0;
+    
+    for (var i = 0; i < Player.playerNumbers - 1; i++) {
+        try {
+            nextPlayer = Player.getPlayerNumb(i + 1); // Checking next player
+        } catch (Exception ignored) {
         }
-        for( var i = 0; i<Player.playerNumbers; i++) {
-            if(Player.getPlayerNumb(i).getCoin() <=0) {
-                System.out.println(winner.getName()+ " has won the game!");
-                mainFrame.labelText(winner.getName()+ " has won the game!");
-                mainFrame.hideAll();
+        
+        var player = Player.getPlayerNumb(i);
+        
+        if (player.getCoin() <= nextPlayer.getCoin()) {
+            if (index < winner.length) {
+                winner[index] = nextPlayer;
+                index++;
+            } else {
+                break; // Exit the loop if the winner array is full
             }
         }
     }
+    
+    Player[] actualWinners = new Player[index]; // Create an array with the actual number of winners
+    System.arraycopy(winner, 0, actualWinners, 0, index);
+    
+    StringBuilder winnersText = new StringBuilder();
+    
+    for (var i = 0; i < actualWinners.length; i++) {
+        winnersText.append(actualWinners[i].getName());
+        
+        if (i < actualWinners.length - 1) {
+            winnersText.append(", ");
+        }
+    }
+    
+    System.out.println(winnersText.toString() + " has won the game!");
+    mainFrame.labelText(winnersText.toString() + " has won the game!");
+    mainFrame.hideAll();
+}
 }
