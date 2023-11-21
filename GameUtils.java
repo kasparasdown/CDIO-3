@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class GameUtils {
@@ -53,6 +56,7 @@ public class GameUtils {
                 tile.getOwner().addCoins(+tile.getRent());
                 System.out.println(Player.getCurrentPlayer().getName()+" paid "+tile.getOwner().getName());
                 mainFrame.buyButtonVisible(false);
+                checkWinner();
             }
         }
         else {
@@ -75,5 +79,22 @@ public class GameUtils {
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.labelText(player.getName() + " it's your turn now, roll");
         mainFrame.setLogo(player.getLocation());
+    }
+    public static void checkWinner() {
+        Player winner = Player.getPlayerNumb(0);
+        for(var i=0; i<Player.playerNumbers; i++) {
+            var nextPlayer = (i < Player.playerNumbers) ? Player.getPlayerNumb(i+1) : Player.getPlayerNumb(i);
+            var player = Player.getPlayerNumb(i);
+            if(player.getCoin()<=nextPlayer.getCoin()) {
+                winner = nextPlayer;
+            }
+        }
+        for( var i = 0; i<Player.playerNumbers; i++) {
+            if(Player.getPlayerNumb(i).getCoin() <=0) {
+                System.out.println(winner.getName()+ " has won the game!");
+                mainFrame.labelText(winner.getName()+ " has won the game!");
+                mainFrame.hideAll();
+            }
+        }
     }
 }

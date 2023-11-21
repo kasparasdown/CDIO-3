@@ -196,4 +196,8 @@ public class Frame extends JFrame implements ActionListener {
     public void setLogo(int numb) {
         logoLabel.setIcon(Images.getImageIcon(numb));
     }
+    public void hideAll() {
+        botPanel.setVisible(false);
+        logoLabel.setVisible(false);
+    }
 }

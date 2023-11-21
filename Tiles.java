@@ -25,7 +25,7 @@ public class Tiles {
     }
     public static Tiles[] getAllTiles() {
         tiles = new Tiles[24];
-        tiles[0] = new StartField(0,"Start", 2);
+        tiles[0] = new StartField(0,"Start");
         tiles[1] = new PropertyField(1, "Bowlinghallen1", 2, 3);
         tiles[2] = new PropertyField(2, "Zoo2", 2, 3);
         tiles[3] = new ChanceField(3, "Chancefield");//CHANGE THIS
@@ -112,15 +112,19 @@ class ChanceField extends Tiles {
     public ChanceField(int position, String name) {
         super(position, name);
     }
-    //call a random card, from the chancecard class
-    public void handleTileAction() {
-    }
 }
 
 class StartField extends Tiles {
     //private int money;
-    public StartField(int position, String name, int money) {
+    public StartField(int position, String name) {
         super(0, "START");
-        //this.money = 2;
+    }
+}
+class GoPrison extends Tiles {
+    public GoPrison(int position, String name) {
+        super(position, name);
+    }
+    public static void setInPrison(Player player) {
+
     }
 }
