@@ -20,7 +20,7 @@ public class Images {
     private static String getImagePath(int logoNum) {
         switch (logoNum) {
             case 1:
-                return IMAGE_DIRECTORY + "burger.png";
+                return IMAGE_DIRECTORY + "tBurgerJoint.png";
             case 2:
                 return IMAGE_DIRECTORY + "2.png";
             case 3:
