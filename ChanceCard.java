@@ -26,8 +26,8 @@ public class ChanceCard {
                 move5TilesForward();
                 return "Move 5 tiles forward";
             case 3:
-                moveToOrange();
-                return "Move to Orange";
+                moveToSwimmingPool();
+                return "Move to Swimming Pool";
             case 4:
                 moveOneTileForwardOrDrawAgain();
                 return "Move 1 tile forward or draw again";
@@ -92,9 +92,9 @@ public class ChanceCard {
             player.setLocation(newPosition);
     }
 
-    private void moveToOrange(){
+    private void moveToSwimmingPool(){
         Player player = Player.getCurrentPlayer();
-            player.setLocation(10);
+            player.setLocation(11);
         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
