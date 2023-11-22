@@ -20,17 +20,53 @@ public class Images {
     private static String getImagePath(int logoNum) {
         switch (logoNum) {
             case 1:
-                return IMAGE_DIRECTORY + "burger.png";
+                return IMAGE_DIRECTORY + "tBurgerJoint.png";
             case 2:
-                return IMAGE_DIRECTORY + "2.png";
+                return IMAGE_DIRECTORY + "tPizza.png";
             case 3:
-                return IMAGE_DIRECTORY + "3.png";
+                return IMAGE_DIRECTORY + "tChance.png";
             case 4:
-                return IMAGE_DIRECTORY + "4.png";
+                return IMAGE_DIRECTORY + "tCandyStore.png";
             case 5:
-                return IMAGE_DIRECTORY + "5.png";
+                return IMAGE_DIRECTORY + "tIceCreamParlour.png";
+            case 6:
+                return IMAGE_DIRECTORY + "tJail.png";
+            case 7:
+                return IMAGE_DIRECTORY + "tMuseum.png";
+            case 8:
+                return IMAGE_DIRECTORY + "tLibrary.png";
+            case 9:
+                return IMAGE_DIRECTORY + "tChance.png";
+            case 10:
+                return IMAGE_DIRECTORY + "tSkatePark.png";
+            case 11:
+                return IMAGE_DIRECTORY + "tSwimmingPool.png";
+            case 12:
+                return IMAGE_DIRECTORY + "tFreeParking.png";
+            case 13:
+                return IMAGE_DIRECTORY + "tMovieTheater.png";
+            case 14:
+                return IMAGE_DIRECTORY + "tVideoGameArcade.png";
+            case 15:
+                return IMAGE_DIRECTORY + "tChance.png";
+            case 16:
+                return IMAGE_DIRECTORY + "tToyStore.png";
+            case 17:
+                return IMAGE_DIRECTORY + "tPetStore.png";
+            case 18:
+                return IMAGE_DIRECTORY + "tGoToJail.png";
+            case 19:
+                return IMAGE_DIRECTORY + "tBowlingAlley.png";
+            case 20:
+                return IMAGE_DIRECTORY + "tTheZoo.png";
+            case 21:
+                return IMAGE_DIRECTORY + "tChance.png";
+            case 22:
+                return IMAGE_DIRECTORY + "tParkPlace.png";
+            case 23:
+                return IMAGE_DIRECTORY + "tBoardWalk.png";
             default:
-                return IMAGE_DIRECTORY + "start.png";
+                return IMAGE_DIRECTORY + "tstart.png";
         }
     }
 
