@@ -16,6 +16,7 @@ public class Frame extends JFrame implements ActionListener {
 
     Frame() {
         
+        //top mainlabel
         label = new JLabel("Choose the number of players");
         label.setFont(myFont);
         label.setBackground(Color.gray);
@@ -23,15 +24,17 @@ public class Frame extends JFrame implements ActionListener {
         label.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        cardLabel = new JLabel("Choose the number of players");
+        //bottom label, tells what chancecard you drew
+        cardLabel = new JLabel();
         cardLabel.setFont(myFont);
         cardLabel.setBackground(Color.gray);
         cardLabel.setVisible(false);
         cardLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        //Adds the image of the tiles
         logoLabel = new JLabel();
-        logoLabel.setVisible(true);
+        logoLabel.setVisible(false);
         logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         logoLabel.setIcon(Images.getImageIcon(0));
@@ -39,6 +42,7 @@ public class Frame extends JFrame implements ActionListener {
         logoLabel.setForeground(Color.RED);
         logoLabel.setHorizontalTextPosition(JLabel.CENTER);
         
+        //tells you where you are. Second label from top
         locationLabel = new JLabel("START");
         locationLabel.setFont(myFont);
         locationLabel.setBackground(Color.gray);
@@ -151,6 +155,7 @@ public class Frame extends JFrame implements ActionListener {
                 label.setText(Player.getCurrentPlayer().getName() + " starts. Roll!");
                 getPlayerLabels(); //Inserts the players Points on the right side
                 locationLabel.setVisible(true);
+                logoLabel.setVisible(true);
             }
         }
         var rollResult = 0;

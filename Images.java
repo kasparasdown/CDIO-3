@@ -19,6 +19,8 @@ public class Images {
 
     private static String getImagePath(int logoNum) {
         switch (logoNum) {
+            case 0:
+                return IMAGE_DIRECTORY + "tStart.png";
             case 1:
                 return IMAGE_DIRECTORY + "tBurgerJoint.png";
             case 2:
@@ -71,6 +73,6 @@ public class Images {
     }
 
     private static ImageIcon getDefaultImageIcon() {
-        return new ImageIcon(Images.class.getClassLoader().getResource(IMAGE_DIRECTORY + "start.png"));
+        return new ImageIcon(Images.class.getClassLoader().getResource(IMAGE_DIRECTORY + "Monopoly.jpg"));
     }
 }
