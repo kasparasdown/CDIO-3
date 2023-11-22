@@ -3,13 +3,12 @@ public class Tiles {
     private int position;
     private String name;
     static private Tiles[] tiles;
+    Player owner;
 
     public Tiles(int position, String name) {
         this.position = position;
         this.name = name;
-    }
-    public String getType() {
-        return "Tile";
+        this.owner = null;
     }
     public String getName() {
         return name;
@@ -18,12 +17,12 @@ public class Tiles {
         return position;
     }
     public void setPos(int pos){
-        position=pos;
+        this.position=pos;
     }
     public void handleTileAction() {
         //empty, gonna override
     }
-    public static Tiles[] getAllTiles() {
+    public static void createTiles() {
         tiles = new Tiles[24];
         tiles[0] = new StartField(0,"Start");
         tiles[1] = new PropertyField(1, "Burger Joint 1", 2, 3, null);
@@ -49,10 +48,24 @@ public class Tiles {
         tiles[21] = new ChanceField(21, "Chancefield");
         tiles[22] = new PropertyField(22, "Park Place 22", 2, 3, null);
         tiles[23] = new PropertyField(23, "Broadwalk 23", 2, 3, null);
+    }
+    public static Tiles[] getAllTiles() {
         return tiles;
     }
     public String toString() {
         return "Field: "+position+" "+name;
+    }
+    public Player getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(Player player) {
+        if (this.owner == null) {
+        this.owner = player;
+        } 
+    }
+    public boolean isOwned() {
+        return this.owner != null;
     }
 }
 
@@ -64,7 +77,6 @@ class PropertyField extends Tiles {
     public PropertyField(int position, String name, int rent, int price, Player owner) {
         super(position, name);
         this.rent = rent;
-        this.owner = null;
         this.price = price;
         this.owner = owner;
     }
@@ -77,9 +89,6 @@ class PropertyField extends Tiles {
         if (this.owner == null) {
         this.owner = player;
         } 
-        else if (this.owner != player) {
-        this.owner = player;
-        }
     }
 
     public int getRent() {

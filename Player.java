@@ -5,13 +5,12 @@ public class Player {
     private static Player[] players;
     private static int playerIndex = 0;
     private int location;
-    private Tiles[] tiles;
+    private Tiles[] tiles = Tiles.getAllTiles();
     private Tiles currentTile;
     private boolean hasGetOutOfJailFreeCard;
 
 
     public Player(String name) {
-        tiles = Tiles.getAllTiles();
         this.name = name;
         switch(playerNumbers) {
             case 2:

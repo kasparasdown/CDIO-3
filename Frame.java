@@ -210,5 +210,6 @@ public class Frame extends JFrame implements ActionListener {
     public void hideAll() {
         botPanel.setVisible(false);
         logoLabel.setVisible(false);
+        locationLabel.setVisible(false);
     }
 }

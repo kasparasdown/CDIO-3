@@ -3,6 +3,7 @@ public class GameUtils {
     static Frame mainFrame;
 
     public static void runGame() {
+        Tiles.createTiles();
         mainFrame = new Frame();
     }
     public static void move(int roll) {
@@ -15,7 +16,6 @@ public class GameUtils {
         player.setLocation(newlocation);
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
-        System.out.println(player.getTile().getName());
         payRent();
         if(player.getCoin()<=0) {
             checkWinner();
@@ -23,7 +23,6 @@ public class GameUtils {
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
             String str = card.performCardAction();
-            System.out.println(str);
             mainFrame.setChanceCard(true, str);
         }
     }
@@ -39,9 +38,6 @@ public class GameUtils {
                 mainFrame.buyButtonVisible(false);
             }
         }
-        else {
-            System.out.println("This is not a property");
-        }
     }
     public static void payRent() {
         var player = Player.getCurrentPlayer();
@@ -49,7 +45,7 @@ public class GameUtils {
             PropertyField tile = (PropertyField) player.getTile();
             System.out.println(tile.isOwned());
             if(tile.isOwned()) {
-                mainFrame.setOwner(tile.getOwner().getName());
+                mainFrame.setOwner(tile.getOwner().getName()); //sets the name label of the owner of the tile
             }
             if (tile.isOwned()) {
                 Player.getCurrentPlayer().addCoins(-tile.getRent());
@@ -106,8 +102,8 @@ public class GameUtils {
         }
     }
     
-    System.out.println(winnersText.toString() + " has won the game!");
-    mainFrame.labelText(winnersText.toString() + " has won the game!");
+    System.out.println(winnersText.toString() + " Won!");
+    mainFrame.labelText(winnersText.toString() + " Won the game!");
     mainFrame.hideAll();
 }
 }
