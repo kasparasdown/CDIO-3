@@ -51,7 +51,7 @@ public class ChanceCard {
                 return "Birthday boy";
             case 11:
                 pinkOrDarkBlue();
-                return "Move to a pink or dark blue tile";
+                return "Move to Library";
             case 12:
                 homeworkDone();
                 return "homework done";
@@ -160,7 +160,7 @@ public class ChanceCard {
     private void pinkOrDarkBlue(){
         //Only moving to pink
         Player player = Player.getCurrentPlayer();
-            player.setLocation(7);
+            player.setLocation(8);
 
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
