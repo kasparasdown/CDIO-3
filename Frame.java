@@ -6,7 +6,7 @@ public class Frame extends JFrame implements ActionListener {
     JButton rollButton, skipButton;
     JButton buyButton;
     JButton[] playerButton = new JButton[3];
-    JLabel label, plabel, logoLabel, cardLabel;
+    JLabel label, plabel, logoLabel, cardLabel, ownerLabel;
     JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
@@ -35,6 +35,9 @@ public class Frame extends JFrame implements ActionListener {
         logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         logoLabel.setIcon(Images.getImageIcon(0));
+        logoLabel.setFont(new Font("myFont", Font.BOLD, 30));
+        logoLabel.setForeground(Color.RED);
+        logoLabel.setHorizontalTextPosition(JLabel.CENTER);
         
         locationLabel = new JLabel("START");
         locationLabel.setFont(myFont);
@@ -195,6 +198,9 @@ public class Frame extends JFrame implements ActionListener {
     }
     public void setLogo(int numb) {
         logoLabel.setIcon(Images.getImageIcon(numb));
+    }
+    public void setOwner(String name) {
+        logoLabel.setText(name);
     }
     public void hideAll() {
         botPanel.setVisible(false);

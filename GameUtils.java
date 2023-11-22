@@ -54,7 +54,9 @@ public class GameUtils {
             var money = player.getCoin();
             PropertyField tile = (PropertyField) player.getTile();
             System.out.println(tile.isOwned());
-            if(tile.isOwned()) System.out.println(tile.getOwner().getName());
+            if(tile.isOwned()) {
+                mainFrame.setOwner(tile.getOwner().getName());
+            }
             if (tile.isOwned()) {
                 Player.getCurrentPlayer().addCoins(-tile.getRent());
                 tile.getOwner().addCoins(0);
@@ -80,6 +82,7 @@ public class GameUtils {
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.labelText(player.getName() + " it's your turn now, roll");
         mainFrame.setLogo(player.getLocation());
+        mainFrame.setOwner("");
     }
     public static void checkWinner() {
     Player[] winner = new Player[Player.playerNumbers];

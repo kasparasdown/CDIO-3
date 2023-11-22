@@ -12,7 +12,7 @@ public class Images {
             Image newimg = image.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH); // Scale it the smooth way
             return new ImageIcon(newimg);
         } catch (Exception e) {
-            System.out.println("Something went wrong with logo: " + e.getMessage());
+            System.out.println("Something went wrong with logo with input"+ number+ "   :" + e.getMessage());
             return getDefaultImageIcon();
         }
     }
@@ -44,7 +44,7 @@ public class Images {
             case 12:
                 return IMAGE_DIRECTORY + "tFreeParking.png";
             case 13:
-                return IMAGE_DIRECTORY + "tMovieTheater.png";
+                return IMAGE_DIRECTORY + "tMovieTheatre.png";
             case 14:
                 return IMAGE_DIRECTORY + "tVideoGameArcade.png";
             case 15:
