@@ -90,7 +90,9 @@ class PropertyField extends Tiles {
     }
 
     public void makeFree() {
-        this.price = 0;
+        if(!this.isOwned()) {
+            this.price = 0;
+        }
     }
 
     public boolean isOwned() {
