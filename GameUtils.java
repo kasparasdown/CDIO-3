@@ -47,7 +47,7 @@ public class GameUtils {
             if(tile.isOwned()) {
                 mainFrame.setOwner(tile.getOwner().getName()); //sets the name label of the owner of the tile
             }
-            if (tile.isOwned()) {
+            if (tile.isOwned() && !tile.getOwner().equals(player)) {
                 Player.getCurrentPlayer().addCoins(-tile.getRent());
                 tile.getOwner().addCoins(+tile.getRent());
                 System.out.println(Player.getCurrentPlayer().getName()+" paid "+tile.getOwner().getName());
@@ -66,25 +66,26 @@ public class GameUtils {
         mainFrame.setLogo(player.getLocation());
         mainFrame.setOwner("");
     }
+
+
     public static void checkWinner() {
     Player[] winner = new Player[Player.playerNumbers];
-    Player nextPlayer = Player.getPlayerNumb(1);
+    Player[] players = Player.getPlayers();
     var index = 0;
-    
-    for (var i = 0; i < Player.playerNumbers - 1; i++) {
-        try {
-            nextPlayer = Player.getPlayerNumb(i + 1); // Checking next player
-        } catch (Exception ignored) {
-        }
-        
-        var player = Player.getPlayerNumb(i);
-        
-        if (player.getCoin() <= nextPlayer.getCoin()) {
-            if (index < winner.length) {
-                winner[index] = nextPlayer;
-                index++;
-            } else {
-                break; // Exit the loop if the winner array is full
+    winner[0] = Player.getPlayerNumb(0);
+    for (var player : players) {        
+        for (var i = 0; i<winner.length; i++) {
+            if (winner[0].getCoin() < player.getCoin()) {
+                    winner[0] = player;
+                    index = 1;
+            }
+            else if (winner[0].getCoin() == player.getCoin() && (winner[1]==null)) {
+                    winner[1] = player;
+                    index = 2;
+            }
+            else if (winner[1].getCoin() == player.getCoin()) {
+                    winner[2] = player;
+                    index = 3;
             }
         }
     }
