@@ -39,13 +39,13 @@ public class ChanceCard {
                 return "Move to the Bowling Alley";
             case 7:
                 lightBlueTile();
-                return "Move to a light blue tile";
+                return "Move to the Candy Store";
             case 8:
                 acquireGetOutOfJailFreeCard();
                 return "Get out of jail free card";
             case 9:
                 beachPromenade();
-                return "Advance to Start";
+                return "Move to the Beachpromenade";
             case 10:
                 birthday();
                 return "Birthday boy";
