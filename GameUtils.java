@@ -1,11 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 public class GameUtils {
     static Frame mainFrame;
-    private static ChanceCard[] chanceCards;
 
     public static void runGame() {
         mainFrame = new Frame();
@@ -51,7 +46,6 @@ public class GameUtils {
     public static void payRent() {
         var player = Player.getCurrentPlayer();
         if(player.getTile() instanceof PropertyField) {
-            var money = player.getCoin();
             PropertyField tile = (PropertyField) player.getTile();
             System.out.println(tile.isOwned());
             if(tile.isOwned()) {
@@ -59,20 +53,12 @@ public class GameUtils {
             }
             if (tile.isOwned()) {
                 Player.getCurrentPlayer().addCoins(-tile.getRent());
-                tile.getOwner().addCoins(0);
+                tile.getOwner().addCoins(+tile.getRent());
                 System.out.println(Player.getCurrentPlayer().getName()+" paid "+tile.getOwner().getName());
                 mainFrame.buyButtonVisible(false);
                 System.out.println(Player.getCurrentPlayer().getName()+" paid 2M to "+tile.getOwner().getName());
             }
         }
-    }
-
-    private static void drawChanceCard() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(chanceCards.length);
-        ChanceCard drawnCard = chanceCards[randomIndex];
-
-        drawnCard.performCardAction();
     }
 
     public static void switchPlayer() {
