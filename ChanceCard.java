@@ -35,8 +35,8 @@ public class ChanceCard {
                 toMuchCandy();
                 return "To much candy";
             case 6:
-                orangeOrGreen();
-                return "Move to a orange or green tile";
+                bowlingAlley();
+                return "Move to the Bowling Alley";
             case 7:
                 lightBlueTile();
                 return "Move to a light blue tile";
@@ -109,7 +109,7 @@ public class ChanceCard {
         player.removeCoins(2);
     }
 
-    private void orangeOrGreen(){
+    private void bowlingAlley(){
         //We only moving to green tile
         Player player = Player.getCurrentPlayer();
             player.setLocation(19);
