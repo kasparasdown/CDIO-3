@@ -63,7 +63,7 @@ public class ChanceCard {
                 return "Move to skatepark";
             case 15:
                 lightBlueOrRed();
-                return "Move to a ligth blue";
+                return "Move to a light blue tile";
             case 16:
                 brownOrYellow();
                 return "Move to a brown";
