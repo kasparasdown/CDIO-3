@@ -212,5 +212,6 @@ public class Frame extends JFrame implements ActionListener {
         botPanel.setVisible(false);
         logoLabel.setVisible(false);
         locationLabel.setVisible(false);
+        cardLabel.setVisible(false);
     }
 }

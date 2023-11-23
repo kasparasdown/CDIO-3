@@ -17,6 +17,7 @@ public class GameUtils {
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
         payRent();
+        ownerName();
         if(player.getCoin()<=0) {
             checkWinner();
         }
@@ -34,8 +35,8 @@ public class GameUtils {
             if (money>tile.getPrice() && !tile.isOwned()) {
                 Player.getCurrentPlayer().addCoins(-tile.getPrice());
                 tile.setOwner(Player.getCurrentPlayer());
-                System.out.println(tile.getName()+" is now owned by"+tile.getOwner().getName());
                 mainFrame.buyButtonVisible(false);
+                ownerName();
             }
         }
     }
@@ -43,16 +44,12 @@ public class GameUtils {
         var player = Player.getCurrentPlayer();
         if(player.getTile() instanceof PropertyField) {
             PropertyField tile = (PropertyField) player.getTile();
-            System.out.println(tile.isOwned());
-            if(tile.isOwned()) {
-                mainFrame.setOwner(tile.getOwner().getName()); //sets the name label of the owner of the tile
-            }
+            ownerName();
             if (tile.isOwned() && !tile.getOwner().equals(player)) {
                 Player.getCurrentPlayer().addCoins(-tile.getRent());
                 tile.getOwner().addCoins(+tile.getRent());
-                System.out.println(Player.getCurrentPlayer().getName()+" paid "+tile.getOwner().getName());
                 mainFrame.buyButtonVisible(false);
-                System.out.println(Player.getCurrentPlayer().getName()+" paid 2M to "+tile.getOwner().getName());
+                mainFrame.setChanceCard(true, Player.getCurrentPlayer().getName()+" paid M2 to "+tile.getOwner().getName());
             }
         }
     }
@@ -65,6 +62,16 @@ public class GameUtils {
         mainFrame.labelText(player.getName() + " it's your turn now, roll");
         mainFrame.setLogo(player.getLocation());
         mainFrame.setOwner("");
+        ownerName();
+    }
+    public static void ownerName() {
+        var tile = Player.getCurrentPlayer().getTile();
+        if(tile.isOwned()) {
+            mainFrame.setOwner(tile.getOwner().getName());
+        }
+        else {
+            mainFrame.setOwner("");
+        }
     }
 
 
@@ -73,15 +80,13 @@ public class GameUtils {
         Player[] players = Player.getPlayers();
         var index = 1;
         winner[0] = Player.getPlayerNumb(0);
-        System.out.println(winner[0].getName());
             for (var player : players) {        
                 if (winner[0].getCoin() < player.getCoin()) {
                         winner[0] = player;
                         index = 1;
-                        System.out.println("1 WINNER!");
                 }
             }
-        System.out.println("has won??  "+ winner[0].getName());
+
         
         Player[] actualWinners = new Player[index]; // Create an array with the actual number of winners
         var n = 0;
@@ -117,5 +122,8 @@ public class GameUtils {
         catch(ArrayIndexOutOfBoundsException ignore) {
         }
         mainFrame.hideAll();
+    }
+    public static void changeLogo(int logoNum) {
+        mainFrame.setLogo(logoNum);
     }
 }

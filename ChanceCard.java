@@ -75,6 +75,7 @@ public class ChanceCard {
     
     private void advanceToGo(){
         Player.getCurrentPlayer().setLocation(0);
+        GameUtils.changeLogo(0);
     }
 
     private void move5TilesForward(){
@@ -82,6 +83,7 @@ public class ChanceCard {
         var player = Player.getCurrentPlayer();
         int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
         player.setLocation(newPosition);
+        GameUtils.changeLogo(player.getLocation());
     }
 
     private void moveOneTileForwardOrDrawAgain(){
@@ -90,11 +92,13 @@ public class ChanceCard {
         var player = Player.getCurrentPlayer();
         int newPosition = (player.getLocation() + steps) % Tiles.getAllTiles().length;
             player.setLocation(newPosition);
+            GameUtils.changeLogo(newPosition);
     }
 
     private void moveToSwimmingPool(){
         Player player = Player.getCurrentPlayer();
             player.setLocation(11);
+            GameUtils.changeLogo(player.getLocation());
         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
@@ -113,6 +117,7 @@ public class ChanceCard {
         //We only moving to green tile
         Player player = Player.getCurrentPlayer();
             player.setLocation(19);
+            GameUtils.changeLogo(player.getLocation());
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
@@ -126,6 +131,7 @@ public class ChanceCard {
         Player player = Player.getCurrentPlayer();
         // input statement in frame
             player.setLocation(4);
+            GameUtils.changeLogo(player.getLocation());
 
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
@@ -143,6 +149,7 @@ public class ChanceCard {
     private void beachPromenade(){
         Player player = Player.getCurrentPlayer();
         player.setLocation(23);
+        GameUtils.changeLogo(player.getLocation());
 
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
@@ -161,6 +168,7 @@ public class ChanceCard {
         //Only moving to pink
         Player player = Player.getCurrentPlayer();
             player.setLocation(8);
+            GameUtils.changeLogo(player.getLocation());
 
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
@@ -179,6 +187,7 @@ public class ChanceCard {
     public void moveRed(){
         Player player = Player.getCurrentPlayer();
             player.setLocation(13);
+            GameUtils.changeLogo(player.getLocation());
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
@@ -193,6 +202,7 @@ public class ChanceCard {
         Player player = Player.getCurrentPlayer();
 
         player.setLocation(10);
+        GameUtils.changeLogo(player.getLocation());
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
@@ -206,6 +216,7 @@ public class ChanceCard {
         //only lightBlue
         Player player = Player.getCurrentPlayer();
         player.setLocation(4);
+        GameUtils.changeLogo(player.getLocation());
 
         Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
@@ -221,6 +232,7 @@ public class ChanceCard {
         Player player = Player.getCurrentPlayer();
 
             player.setLocation(1);
+            GameUtils.changeLogo(player.getLocation());
          Tiles currentTile = player.getTile();
         if (currentTile instanceof PropertyField){
             PropertyField propertyTile = (PropertyField) currentTile;
