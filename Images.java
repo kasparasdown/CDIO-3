@@ -16,6 +16,19 @@ public class Images {
             return getDefaultImageIcon();
         }
     }
+    public static ImageIcon getMap() {
+        try {
+            String imagePath = getImagePath(24);
+            ImageIcon logo = new ImageIcon(Images.class.getClassLoader().getResource(imagePath));
+            Image image = logo.getImage(); // Transform it
+            Image newimg = image.getScaledInstance(165, 165, java.awt.Image.SCALE_SMOOTH); // Scale it the smooth way
+            return new ImageIcon(newimg);
+            } 
+        catch (Exception e) {
+            System.out.println("Something went wrong with MAP" + e.getMessage());
+            return getDefaultImageIcon();
+        }
+    }
 
     private static String getImagePath(int logoNum) {
         switch (logoNum) {
@@ -67,6 +80,8 @@ public class Images {
                 return IMAGE_DIRECTORY + "tParkPlace.png";
             case 23:
                 return IMAGE_DIRECTORY + "tBoardWalk.png";
+            case 24:
+                return IMAGE_DIRECTORY + "board.png";
             default:
                 return IMAGE_DIRECTORY + "tstart.png";
         }

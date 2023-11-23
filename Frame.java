@@ -1,23 +1,24 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.net.URL;
+
 
 public class Frame extends JFrame implements ActionListener {
     JButton rollButton, skipButton;
     JButton buyButton;
     JButton[] playerButton = new JButton[3];
-    JLabel label, plabel, logoLabel, cardLabel, ownerLabel;
+    JLabel label, plabel, logoLabel, maplabel, cardLabel, ownerLabel;
     JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
     Font myFont = new Font("myFont", Font.BOLD, 23);
     Font smallFont = new Font("smallFont", Font.BOLD, 15);
-    ImageIcon logo;
 
     Frame() {
         
         //top mainlabel
-        label = new JLabel("Choose the number of players");
+        label = new JLabel("Choose number of players");
         label.setFont(myFont);
         label.setBackground(Color.gray);
         label.setVisible(true);
@@ -42,7 +43,13 @@ public class Frame extends JFrame implements ActionListener {
         logoLabel.setForeground(Color.RED);
         logoLabel.setHorizontalTextPosition(JLabel.CENTER); //ownerlabel location
 
-        
+        //Boardmap
+        maplabel = new JLabel();
+        maplabel.setVisible(true);
+        maplabel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
+        maplabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        maplabel.setIcon(Images.getMap());
+
         //tells you where you are. Second label from top
         locationLabel = new JLabel("START");
         locationLabel.setFont(myFont);
@@ -62,8 +69,8 @@ public class Frame extends JFrame implements ActionListener {
 
         rightPanel = new JPanel();
         rightPanel.setBackground(Color.orange);
-        rightPanel.setPreferredSize(new Dimension(125, 100));
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setPreferredSize(new Dimension(175, 100));
+        rightPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         rollButton = new JButton("Roll");
         rollButton.setBounds(0, 0, 50, 25);
@@ -187,12 +194,13 @@ public class Frame extends JFrame implements ActionListener {
             pointsLabel[i] = new JLabel("P" + (i + 1) + ": " + Player.getPlayerNumb(i).getCoin() + "$");
             pointsLabel[i].setFont(myFont);
             pointsLabel[i].setForeground(Color.BLACK);
-			pointsLabel[i].setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+			pointsLabel[i].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+            pointsLabel[i].setHorizontalAlignment(JLabel.LEFT);
             rightPanel.add(pointsLabel[i]);
         }
         rightPanel.revalidate();
         rightPanel.repaint();
-
+        rightPanel.add(maplabel);
         return pointsLabel;
     }
     //Tells the player location on Board
