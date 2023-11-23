@@ -69,42 +69,53 @@ public class GameUtils {
 
 
     public static void checkWinner() {
-    Player[] winner = new Player[Player.playerNumbers];
-    Player[] players = Player.getPlayers();
-    var index = 0;
-    winner[0] = Player.getPlayerNumb(0);
-    for (var player : players) {        
-        for (var i = 0; i<winner.length; i++) {
-            if (winner[0].getCoin() < player.getCoin()) {
-                    winner[0] = player;
-                    index = 1;
+        Player[] winner = new Player[Player.playerNumbers];
+        Player[] players = Player.getPlayers();
+        var index = 1;
+        winner[0] = Player.getPlayerNumb(0);
+        System.out.println(winner[0].getName());
+            for (var player : players) {        
+                if (winner[0].getCoin() < player.getCoin()) {
+                        winner[0] = player;
+                        index = 1;
+                        System.out.println("1 WINNER!");
+                }
             }
-            else if (winner[0].getCoin() == player.getCoin() && (winner[1]==null)) {
-                    winner[1] = player;
-                    index = 2;
-            }
-            else if (winner[1].getCoin() == player.getCoin()) {
-                    winner[2] = player;
-                    index = 3;
-            }
-        }
-    }
-    
-    Player[] actualWinners = new Player[index]; // Create an array with the actual number of winners
-    System.arraycopy(winner, 0, actualWinners, 0, index);
-    
-    StringBuilder winnersText = new StringBuilder();
-    
-    for (var i = 0; i < actualWinners.length; i++) {
-        winnersText.append(actualWinners[i].getName());
+        System.out.println("has won??  "+ winner[0].getName());
         
-        if (i < actualWinners.length - 1) {
-            winnersText.append(", ");
+        Player[] actualWinners = new Player[index]; // Create an array with the actual number of winners
+        var n = 0;
+        for(var i=0; i<winner.length; i++) {
+            if(winner[i] != null) {
+                actualWinners[n] = winner[i];
+                n++;
+            }
         }
+        //For now using try catch, to ignore out of bounds. Should be changed later.
+        try {
+            if(index == 0) {
+            mainFrame.labelText(actualWinners[0].getName() + " Won the game!");
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException ignore) {
+        }
+        try {
+            if (index == 1) {
+            mainFrame.labelText(actualWinners[0].getName() + " Won the game!");
+            mainFrame.locationLabelText(actualWinners[1].getName() + " Won the game!");
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException ignore) {
+        }
+        try {
+            if (index ==2 ) {
+            mainFrame.labelText(actualWinners[0].getName() + " Won the game!");
+            mainFrame.locationLabelText(actualWinners[1].getName() + " Won the game!");
+            mainFrame.setChanceCard(true, actualWinners[3].getName() + " Won the game!");
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException ignore) {
+        }
+        mainFrame.hideAll();
     }
-    
-    System.out.println(winnersText.toString() + " Won!");
-    mainFrame.labelText(winnersText.toString() + " Won the game!");
-    mainFrame.hideAll();
-}
 }
