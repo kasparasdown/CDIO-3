@@ -30,7 +30,7 @@ public class ChanceCard {
                 return "Move to Swimming Pool";
             case 4:
                 moveOneTileForwardOrDrawAgain();
-                return "Move 1 tile forward or draw again";
+                return "Move 1 tile forward";
             case 5:
                 toMuchCandy();
                 return "To much candy";
@@ -63,10 +63,10 @@ public class ChanceCard {
                 return "Move to skatepark";
             case 15:
                 lightBlueOrRed();
-                return "Move to a ligth blue or red tile";
+                return "Move to a ligth blue";
             case 16:
                 brownOrYellow();
-                return "Move to a brown or yellow tile";
+                return "Move to a brown";
             default:
                 System.out.println("unrecongized chance card " + description);
                 return "Advance to Start";
