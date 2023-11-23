@@ -32,15 +32,16 @@ public class Frame extends JFrame implements ActionListener {
         cardLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        //Adds the image of the tiles
+        //Adds the image of the tiles, with owner names
         logoLabel = new JLabel();
         logoLabel.setVisible(false);
         logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         logoLabel.setIcon(Images.getImageIcon(0));
-        logoLabel.setFont(new Font("myFont", Font.BOLD, 30));
+        logoLabel.setFont(new Font("myFont", Font.BOLD, 40));
         logoLabel.setForeground(Color.RED);
-        logoLabel.setHorizontalTextPosition(JLabel.CENTER);
+        logoLabel.setHorizontalTextPosition(JLabel.CENTER); //ownerlabel location
+
         
         //tells you where you are. Second label from top
         locationLabel = new JLabel("START");
