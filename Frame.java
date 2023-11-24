@@ -175,9 +175,9 @@ public class Frame extends JFrame implements ActionListener {
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {
-            GameUtils.switchPlayer();
-            turnRoll(true);
-        }
+                GameUtils.switchPlayer();
+                turnRoll(true);
+            }
         if (click.getSource() == buyButton) {
             GameUtils.buyProperty();
         }

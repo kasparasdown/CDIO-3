@@ -4,6 +4,7 @@ public class ChanceCard {
    
 
     Random rand = new Random();
+    int index;
 
     public String getName(){
         return description;
@@ -11,7 +12,7 @@ public class ChanceCard {
     
    
     public String performCardAction(){
-        int index = rand.nextInt(16)+1; //random select of action
+        index = rand.nextInt(16)+1; //random select of action
         switch(index){
             case 1:
                 advanceToGo();
@@ -65,6 +66,9 @@ public class ChanceCard {
                 System.out.println("unrecongized chance card " + description);
                 return "Advance to Start";
                 }
+    }
+    public int getIndex() {
+        return index;
     }
     //following methods do specific tasks related to the drawn card
     private void advanceToGo(){

@@ -18,18 +18,19 @@ public class GameUtils {
             checkWinner();
         }
         mainFrame.locationLabelText(player.getTile().getName());
+        mainFrame.setLogo(player.getLocation());
+        payRent();
+        ownerName();
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
             String str = card.performCardAction();
             mainFrame.setChanceCard(true, str);
+            mainFrame.setLogo(30+card.getIndex());
         }
         if(player.getTile() instanceof GoPrison) {
             player.setLocation(6);
             player.setInJail(true);
         }
-        mainFrame.setLogo(player.getLocation());
-        payRent();
-        ownerName();
     }
 
     public static void buyProperty() {
