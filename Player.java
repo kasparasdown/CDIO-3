@@ -1,10 +1,15 @@
 public class Player {
-    String name;
-    int coin;
+    private String name;
+    private int coin;
     static int playerNumbers = 0;
     private static Player[] players;
     private static int playerIndex = 0;
     private int location;
+    private Tiles[] tiles = Tiles.getAllTiles();
+    private Tiles currentTile;
+    private boolean hasGetOutOfJailFreeCard;
+    private boolean isInJail;
+
 
     public Player(String name) {
         this.name = name;
@@ -20,24 +25,53 @@ public class Player {
                 break;
         }
         this.location = 0;
+        this.currentTile = tiles[location];
+        this.hasGetOutOfJailFreeCard = false;
+        this.isInJail = false;
+    }
+    public boolean isInJail() {
+        return this.isInJail;
+    }
+
+    public void setInJail(boolean status) {
+        this.isInJail = status;
+    }
+    public boolean hasgetOutOfJailFreeCard() {
+        return this.hasGetOutOfJailFreeCard;
+    }
+
+    public void useGetOutOfJailFreeCard() {
+        this.hasGetOutOfJailFreeCard = false;
+    }
+
+    public void acquireGetOutOfJailFreeCard() {
+        this.hasGetOutOfJailFreeCard = true;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getCoin() {
-        return coin;
+        return this.coin;
     }
     public int getLocation() {
-        return location;
+        return this.currentTile.getPos();
+    }
+    public Tiles getTile() {
+        return tiles[this.location];
     }
     public void setLocation(int location) {
         this.location = location;
+        this.currentTile = tiles[location];
     }
 
     public void addCoins(int value) {
-        coin += value;
+        this.coin += value;
+    }
+
+    public void removeCoins(int value) {
+        this.coin -= value;
     }
 
     public static void totalPlayers(int numb) {
@@ -52,24 +86,22 @@ public class Player {
         }
         return players;
     }
+    public static Player[] getPlayers() {
+        return players;
+    }
 
     public static Player getPlayerNumb(int number) {
         return players[number];
     }
 
-    public static void switchPlayer() {
-        playerIndex = (playerIndex + 1) % playerNumbers;
-    }
-
     public static Player getCurrentPlayer() {
         return players[playerIndex];
     }
-    public void move(int roll) {
-        location = (location + roll) %24;
-        Frame.locationLabelText(Integer.toString(location)); //Changes the label in GUI to the location. CHANGE INT TO A TILE!
+    //Checking current player in the array
+    public static int getPlayerIndex() {
+        return playerIndex;
     }
-
-    public void payRent(int rent) {
-        // gonna pay rent
+    public static void setPlayerIndex(int i) {
+        playerIndex = i;
     }
 }

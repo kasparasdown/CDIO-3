@@ -2,11 +2,13 @@
 public class Tiles {
     private int position;
     private String name;
-    private Tiles[] tiles;
+    static private Tiles[] tiles;
+    Player owner;
 
     public Tiles(int position, String name) {
         this.position = position;
         this.name = name;
+        this.owner = null;
     }
     public String getName() {
         return name;
@@ -15,68 +17,95 @@ public class Tiles {
         return position;
     }
     public void setPos(int pos){
-        position=pos;
+        this.position=pos;
     }
     public void handleTileAction() {
         //empty, gonna override
     }
-    public Tiles[] getAllTiles() {
+    public static void createTiles() {
         tiles = new Tiles[24];
-        tiles[0] = new StartField(0,"Start", 2);
-        tiles[1] = new PropertyField(1, "Bowlinghallen", 4);
-        tiles[2] = new PropertyField(2, "Zoo2", 4);
-        tiles[3] = new PropertyField(3, "EMPTY", 4);//CHANGE THIS
-        tiles[4] = new PropertyField(4, "Zoo3", 4);
-        tiles[5] = new PropertyField(5, "Zoo4", 4);
-        tiles[6] = new PropertyField(6, "EMPTY", 4);//CHANGE THIS
-        tiles[7] = new PropertyField(7, "Zoo5", 4);
-        tiles[8] = new PropertyField(8, "Zoo6", 4);
-        tiles[9] = new PropertyField(9, "EMPTY", 4);//CHANGE THIS
-        tiles[10] = new PropertyField(10, "Zoo7", 4);
-        tiles[11] = new PropertyField(11, "Zoo8", 4);
-        tiles[12] = new PropertyField(12, "EMPTY", 4);//CHANGE THIS
-        tiles[13] = new PropertyField(13, "Zoo9", 4);
-        tiles[14] = new PropertyField(14, "Zoo10", 4);
-        tiles[15] = new PropertyField(15, "EMPTY", 4);//CHANGE THIS
-        tiles[16] = new PropertyField(16, "Zoo11", 4);
-        tiles[17] = new PropertyField(17, "Zoo12", 4);
-        tiles[18] = new PropertyField(18, "EMPTY", 4);//CHANGE THIS
-        tiles[19] = new PropertyField(19, "Zoo13", 4);
-        tiles[20] = new PropertyField(20, "Zoo14", 4);
-        tiles[21] = new PropertyField(21, "EMPTY", 4);//CHANGE THIS
-        tiles[22] = new PropertyField(22, "Zoo15", 4);
-        tiles[23] = new PropertyField(23, "Zoo16", 4);
+        tiles[0] = new StartField(0,"Start");
+        tiles[1] = new PropertyField(1, "Burger Joint 1", 1, 1, null);
+        tiles[2] = new PropertyField(2, "Pizza House 2", 1, 1, null);
+        tiles[3] = new ChanceField(3, "Chancefield");
+        tiles[4] = new PropertyField(4, "Candy Store 4", 1, 1, null);
+        tiles[5] = new PropertyField(5, "Ice Cream Parlour 5", 1, 1, null);
+        tiles[6] = new NoAction(6, "Jail visit 6"); //visit. also players who go to prison ends here
+        tiles[7] = new PropertyField(7, "Museum 7", 2, 2, null);
+        tiles[8] = new PropertyField(8, "Library 8", 2, 2, null);
+        tiles[9] = new ChanceField(9, "Chancefield");
+        tiles[10] = new PropertyField(10, "Skate Park 10", 2, 2, null);
+        tiles[11] = new PropertyField(11, "Swimming Pool 11", 2, 2, null);
+        tiles[12] = new NoAction(12, "Free Parking 12");
+        tiles[13] = new PropertyField(13, "Video Game Arcade 13", 3, 3, null);
+        tiles[14] = new PropertyField(14, "Movie Theater 14", 3, 3, null);
+        tiles[15] = new ChanceField(15, "Chancefield");
+        tiles[16] = new PropertyField(16, "Toy Store 16", 3, 3, null);
+        tiles[17] = new PropertyField(17, "Pet Store 17", 3, 3, null);
+        tiles[18] = new GoPrison(18, "Go to Jail!"); //Goes to prison
+        tiles[19] = new PropertyField(19, "Bowling Alley 19", 4, 4, null);
+        tiles[20] = new PropertyField(20, "The Zoo 20", 4, 4, null);
+        tiles[21] = new ChanceField(21, "Chancefield");
+        tiles[22] = new PropertyField(22, "Park Place 22", 5, 5, null);
+        tiles[23] = new PropertyField(23, "Broadwalk 23", 5, 5, null);
+    }
+    public static Tiles[] getAllTiles() {
         return tiles;
     }
     public String toString() {
         return "Field: "+position+" "+name;
     }
+    public Player getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(Player player) {
+        if (this.owner == null) {
+        this.owner = player;
+        } 
+    }
+    public boolean isOwned() {
+        return this.owner != null;
+    }
 }
 
 class PropertyField extends Tiles {
     private int rent;
+    private int price;
     private Player owner;
 
-    public PropertyField(int position, String name, int rent) {
-        super(position,name);
+    public PropertyField(int position, String name, int rent, int price, Player owner) {
+        super(position, name);
         this.rent = rent;
-        this.owner = null;
+        this.price = price;
+        this.owner = owner;
     }
     //ownerCode for the property objects
     public Player getOwner() {
-        return owner;
+        return this.owner;
     }
 
     public void setOwner(Player player) {
-        owner = player;
+        if (this.owner == null) {
+        this.owner = player;
+        } 
     }
 
     public int getRent() {
-        return rent;
+        return this.rent;
+    }
+    public int getPrice() {
+        return this.price;
+    }
+
+    public void makeFree() {
+        if(!this.isOwned()) {
+            this.price = 0;
+        }
     }
 
     public boolean isOwned() {
-        return owner != null;
+        return this.owner != null;
     }
     @Override
     public void handleTileAction(){
@@ -100,27 +129,19 @@ class ChanceField extends Tiles {
 }
 
 class StartField extends Tiles {
-    private int money;
-    public StartField(int position, String name, int money) {
+    //private int money;
+    public StartField(int position, String name) {
         super(0, "START");
-        this.money = 2;
     }
 }
-
-// ChanceCard.java
-class ChanceCard {
-    private String description;
-
-    public ChanceCard(String description) {
-        this.description = description;
+class GoPrison extends Tiles {
+    public GoPrison(int position, String name) {
+        super(position, name);
     }
-
-    // Getters...
-
-    @Override
-    public String toString() {
-        return "ChanceCard{" +
-                "description='" + description + '\'' +
-                '}';
+}
+class NoAction extends Tiles { //free parking and visit jail
+    //private int money;
+    public NoAction(int position, String name) {
+        super(position, name);
     }
 }

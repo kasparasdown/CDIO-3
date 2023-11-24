@@ -2,26 +2,54 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 public class Frame extends JFrame implements ActionListener {
-    JButton rollButton, skipButton, buyButton;
+    JButton rollButton, skipButton;
+    JButton buyButton;
     JButton[] playerButton = new JButton[3];
-    JLabel label, plabel;
-    static JLabel locationLabel;
+    JLabel label, plabel, logoLabel, maplabel, cardLabel, ownerLabel;
+    JLabel locationLabel;
     JLabel[] pointsLabel;
     JPanel botPanel, midPanel, rightPanel;
     Font myFont = new Font("myFont", Font.BOLD, 23);
     Font smallFont = new Font("smallFont", Font.BOLD, 15);
-    ImageIcon logo;
 
     Frame() {
         
-        label = new JLabel("Choose the number of players");
+        //top mainlabel
+        label = new JLabel("Choose number of players");
         label.setFont(myFont);
         label.setBackground(Color.gray);
         label.setVisible(true);
-        label.setBorder(BorderFactory.createEmptyBorder(15, 0, 30, 0));
+        label.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        //bottom label, tells what chancecard you drew
+        cardLabel = new JLabel();
+        cardLabel.setFont(myFont);
+        cardLabel.setBackground(Color.gray);
+        cardLabel.setVisible(false);
+        cardLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        //Adds the image of the tiles, with owner names
+        logoLabel = new JLabel();
+        logoLabel.setVisible(false);
+        logoLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logoLabel.setIcon(Images.getImageIcon(0));
+        logoLabel.setFont(new Font("myFont", Font.BOLD, 40));
+        logoLabel.setForeground(Color.RED);
+        logoLabel.setHorizontalTextPosition(JLabel.CENTER); //ownerlabel location
+
+        //Boardmap
+        maplabel = new JLabel();
+        maplabel.setVisible(true);
+        maplabel.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
+        maplabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        maplabel.setIcon(Images.getMap());
+
+        //tells you where you are. Second label from top
         locationLabel = new JLabel("START");
         locationLabel.setFont(myFont);
         locationLabel.setBackground(Color.gray);
@@ -40,8 +68,8 @@ public class Frame extends JFrame implements ActionListener {
 
         rightPanel = new JPanel();
         rightPanel.setBackground(Color.orange);
-        rightPanel.setPreferredSize(new Dimension(125, 100));
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setPreferredSize(new Dimension(175, 100));
+        rightPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         rollButton = new JButton("Roll");
         rollButton.setBounds(0, 0, 50, 25);
@@ -96,13 +124,28 @@ public class Frame extends JFrame implements ActionListener {
         botPanel.add(buyButton);
         midPanel.add(label);
         midPanel.add(locationLabel);
+        midPanel.add(logoLabel);
+        midPanel.add(cardLabel);
 
     }
     //Switch between start of turn(rolling) and end of turn (buying or passing turn)
     public void turnRoll(boolean status) {
+            buyButtonVisible(false); //Reset buybutton
             skipButton.setVisible(!status);
             rollButton.setVisible(status);
-            if(true) buyButton.setVisible(!status); //Change to true, when player is on a UnOwned Property!
+            if(Player.getCurrentPlayer().getTile() instanceof PropertyField){
+                PropertyField tile = (PropertyField) Player.getCurrentPlayer().getTile();
+                if((!tile.isOwned()) && tile.getPrice()<Player.getCurrentPlayer().getCoin()) {
+                    buyButtonVisible(!status); //Change to true, when player is on a UnOwned Property!
+                }
+            }
+    }
+    public void buyButtonVisible(boolean status) {
+        buyButton.setVisible(status);
+    }
+    public void setChanceCard(boolean visible, String text) {
+        cardLabel.setVisible(visible);
+        cardLabel.setText(text);
     }
 
     //Takes click from buttons, and do stuff
@@ -119,25 +162,26 @@ public class Frame extends JFrame implements ActionListener {
                 label.setText(Player.getCurrentPlayer().getName() + " starts. Roll!");
                 getPlayerLabels(); //Inserts the players Points on the right side
                 locationLabel.setVisible(true);
+                logoLabel.setVisible(true);
             }
         }
         var rollResult = 0;
         //Rolls for turn, change turn to buystep/skipstep
         if (click.getSource() == rollButton) {
-            turnRoll(false);
             rollResult = Die.dieRoll();
-            Player.getCurrentPlayer().addCoins(rollResult);//Adding coins to player wallet. NEED CHANGE!
             label.setText(Player.getCurrentPlayer().getName() + " rolled: " + rollResult);
-            Player.getCurrentPlayer().move(rollResult);
-            getPlayerLabels();
+            GameUtils.move(rollResult);
+            turnRoll(false);
         }
         //Pass turn to next player
         if (click.getSource() == skipButton) {
-            Player.switchPlayer();
-            locationLabel.setText(Integer.toString(Player.getCurrentPlayer().getLocation())); //Tells the new player where they are standing. CHANGE INTEGER
-            label.setText(Player.getCurrentPlayer().getName() + " it's your turn now, roll");
-            turnRoll(true);
+                GameUtils.switchPlayer();
+                turnRoll(true);
+            }
+        if (click.getSource() == buyButton) {
+            GameUtils.buyProperty();
         }
+        getPlayerLabels();
     }
 
     //Call to get label with all the players points on.
@@ -149,16 +193,32 @@ public class Frame extends JFrame implements ActionListener {
             pointsLabel[i] = new JLabel("P" + (i + 1) + ": " + Player.getPlayerNumb(i).getCoin() + "$");
             pointsLabel[i].setFont(myFont);
             pointsLabel[i].setForeground(Color.BLACK);
-			pointsLabel[i].setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+			pointsLabel[i].setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+            pointsLabel[i].setHorizontalAlignment(JLabel.LEFT);
             rightPanel.add(pointsLabel[i]);
         }
         rightPanel.revalidate();
         rightPanel.repaint();
-
+        rightPanel.add(maplabel);
         return pointsLabel;
     }
     //Tells the player location on Board
-    public static void locationLabelText(String input) {
+    public void locationLabelText(String input) {
         locationLabel.setText(input);
+    }
+    public void labelText(String input) {
+        label.setText(input);
+    }
+    public void setLogo(int numb) {
+        logoLabel.setIcon(Images.getImageIcon(numb));
+    }
+    public void setOwner(String name) {
+        logoLabel.setText(name);
+    }
+    public void hideAll() {
+        botPanel.setVisible(false);
+        logoLabel.setVisible(false);
+        locationLabel.setVisible(false);
+        cardLabel.setVisible(false);
     }
 }
