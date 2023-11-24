@@ -17,6 +17,7 @@ public class GameUtils {
         if(player.getCoin()<=0) {
             checkWinner();
         }
+        mainFrame.locationLabelText(player.getTile().getName());
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
             String str = card.performCardAction();
@@ -26,7 +27,6 @@ public class GameUtils {
             player.setLocation(6);
             player.setInJail(true);
         }
-        mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
         payRent();
         ownerName();
