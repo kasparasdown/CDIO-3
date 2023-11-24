@@ -1,15 +1,9 @@
 import java.util.Random;
 public class ChanceCard {
     private String description;
-    private Player player;
    
 
     Random rand = new Random();
-
-    public ChanceCard(){
-        //this.description = description;
-        //this.player = player;
-    }
 
     public String getName(){
         return description;
@@ -33,7 +27,7 @@ public class ChanceCard {
                 return "Move 1 tile forward";
             case 5:
                 toMuchCandy();
-                return "To much candy";
+                return "To much candy -2";
             case 6:
                 bowlingAlley();
                 return "Move to the Bowling Alley";
@@ -48,13 +42,13 @@ public class ChanceCard {
                 return "Move to the Beachpromenade";
             case 10:
                 birthday();
-                return "Birthday boy";
+                return "Birthday boy +1";
             case 11:
                 pinkOrDarkBlue();
                 return "Move to Library";
             case 12:
                 homeworkDone();
-                return "homework done";
+                return "homework done +2";
             case 13:
                 moveRed();
                 return "Move to a red tile";

@@ -27,10 +27,10 @@ public class Tiles {
         tiles[0] = new StartField(0,"Start");
         tiles[1] = new PropertyField(1, "Burger Joint 1", 1, 1, null);
         tiles[2] = new PropertyField(2, "Pizza House 2", 1, 1, null);
-        tiles[3] = new ChanceField(3, "Chancefield");//CHANGE THIS
+        tiles[3] = new ChanceField(3, "Chancefield");
         tiles[4] = new PropertyField(4, "Candy Store 4", 1, 1, null);
         tiles[5] = new PropertyField(5, "Ice Cream Parlour 5", 1, 1, null);
-        tiles[6] = new NoAction(6, "Jail visit 6");
+        tiles[6] = new NoAction(6, "Jail visit 6"); //visit. also players who go to prison ends here
         tiles[7] = new PropertyField(7, "Museum 7", 2, 2, null);
         tiles[8] = new PropertyField(8, "Library 8", 2, 2, null);
         tiles[9] = new ChanceField(9, "Chancefield");
@@ -42,7 +42,7 @@ public class Tiles {
         tiles[15] = new ChanceField(15, "Chancefield");
         tiles[16] = new PropertyField(16, "Toy Store 16", 3, 3, null);
         tiles[17] = new PropertyField(17, "Pet Store 17", 3, 3, null);
-        tiles[18] = new NoAction(18, "Jail visit 18"); //Change to go to prison later
+        tiles[18] = new GoPrison(18, "Go to Jail!"); //Goes to prison
         tiles[19] = new PropertyField(19, "Bowling Alley 19", 4, 4, null);
         tiles[20] = new PropertyField(20, "The Zoo 20", 4, 4, null);
         tiles[21] = new ChanceField(21, "Chancefield");
@@ -137,9 +137,6 @@ class StartField extends Tiles {
 class GoPrison extends Tiles {
     public GoPrison(int position, String name) {
         super(position, name);
-    }
-    public static void setInPrison(Player player) {
-
     }
 }
 class NoAction extends Tiles { //free parking and visit jail

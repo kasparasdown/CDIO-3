@@ -14,10 +14,6 @@ public class GameUtils {
         }
         var newlocation = (rollLocation) %24;
         player.setLocation(newlocation);
-        mainFrame.locationLabelText(player.getTile().getName());
-        mainFrame.setLogo(player.getLocation());
-        payRent();
-        ownerName();
         if(player.getCoin()<=0) {
             checkWinner();
         }
@@ -26,6 +22,14 @@ public class GameUtils {
             String str = card.performCardAction();
             mainFrame.setChanceCard(true, str);
         }
+        if(player.getTile() instanceof GoPrison) {
+            player.setLocation(6);
+            player.setInJail(true);
+        }
+        mainFrame.locationLabelText(player.getTile().getName());
+        mainFrame.setLogo(player.getLocation());
+        payRent();
+        ownerName();
     }
 
     public static void buyProperty() {
@@ -58,6 +62,15 @@ public class GameUtils {
         mainFrame.setChanceCard(false, null);
         Player.setPlayerIndex((Player.getPlayerIndex() + 1) % Player.playerNumbers);
         var player = Player.getCurrentPlayer();
+        if(player.isInJail()) {
+            if(player.hasgetOutOfJailFreeCard()) { 
+                player.useGetOutOfJailFreeCard();
+            }
+            else {
+                player.addCoins(-1); //Pays 1 coin to jail, if the player is jailed
+            }
+            player.setInJail(false);
+        }
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.labelText(player.getName() + "'s' turn. Roll!");
         mainFrame.setLogo(player.getLocation());
