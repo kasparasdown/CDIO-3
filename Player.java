@@ -34,7 +34,7 @@ public class Player {
     }
 
     public void setInJail(boolean status) {
-        this.hasGetOutOfJailFreeCard = status;
+        this.isInJail = status;
     }
     public boolean hasgetOutOfJailFreeCard() {
         return this.hasGetOutOfJailFreeCard;
