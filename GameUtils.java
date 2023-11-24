@@ -14,13 +14,8 @@ public class GameUtils {
         }
         var newlocation = (rollLocation) %24;
         player.setLocation(newlocation);
-        if(player.getCoin()<=0) {
-            checkWinner();
-        }
         mainFrame.locationLabelText(player.getTile().getName());
         mainFrame.setLogo(player.getLocation());
-        payRent();
-        ownerName();
         if(player.getTile() instanceof ChanceField) {
             var card = new ChanceCard();
             String str = card.performCardAction();
@@ -30,6 +25,11 @@ public class GameUtils {
         if(player.getTile() instanceof GoPrison) {
             player.setLocation(6);
             player.setInJail(true);
+        }
+        payRent();
+        ownerName();
+        if(player.getCoin()<=0) {
+            checkWinner();
         }
     }
 
